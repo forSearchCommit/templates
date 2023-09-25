@@ -1,0 +1,166 @@
+[
+  {
+    "Code": "BCM",
+    "DBCode": "COMM"
+  },
+  {
+    "Code": "CNCB",
+    "DBCode": "CITIC"
+  },
+  {
+    "Code": "HXB",
+    "DBCode": "HXBANK"
+  },
+  {
+    "Code": "PAB",
+    "DBCode": "SPABANK"
+  },
+  {
+    "Code": "CBHB",
+    "DBCode": "BOHAIB"
+  },
+  {
+    "Code": "HUNNX",
+    "DBCode": "HNNXS"
+  },
+  {
+    "Code": "JSBC",
+    "DBCode": "JSBANK"
+  },
+  {
+    "Code": "ZYBANK",
+    "DBCode": "ZYB"
+  },
+  {
+    "Code": "JSNX",
+    "DBCode": "JRCB"
+  },
+  {
+    "Code": "LYBANK",
+    "DBCode": "BOLY"
+  },
+  {
+    "Code": "NRCB",
+    "DBCode": "NHB"
+  },
+  {
+    "Code": "ZJRCB",
+    "DBCode": "ZJB"
+  },
+  {
+    "Code": "QSB",
+    "DBCode": "ZBCB"
+  },
+  {
+    "Code": "NCB",
+    "DBCode": "JXB"
+  },
+  {
+    "Code": "GXNX",
+    "DBCode": "GXRCU"
+  },
+  {
+    "Code": "PWEB",
+    "DBCode": "CGNB"
+  },
+  {
+    "Code": "WEBANK",
+    "DBCode": "WEB"
+  },
+  {
+    "Code": "CRBANK",
+    "DBCode": "CRB"
+  },
+  {
+    "Code": "GLB",
+    "DBCode": "GLBANK"
+  },
+  {
+    "Code": "JNRCB",
+    "DBCode": "CZRCB"
+  },
+  {
+    "Code": "INRCC",
+    "DBCode": "LNRCC"
+  },
+  {
+    "Code": "ZJXSBANK",
+    "DBCode": "ZJXSB"
+  },
+  {
+    "Code": "JJCCB",
+    "DBCode": "JJBANK"
+  },
+  {
+    "Code": "DRCB",
+    "DBCode": "DRCBCL"
+  },
+  {
+    "Code": "HNBANK",
+    "DBCode": "HNB"
+  },
+  {
+    "Code": "ZZB",
+    "DBCode": "ZZYH"
+  },
+  {
+    "Code": "BOIMC",
+    "DBCode": "H3CB"
+  },
+  {
+    "Code": "HEBNX",
+    "DBCode": "RCCOB"
+  },
+  {
+    "Code": "LJBANK",
+    "DBCode": "DAQINGB"
+  },
+  {
+    "Code": "BODD",
+    "DBCode": "DDB"
+  },
+  {
+    "Code": "CDBANK",
+    "DBCode": "BOCD"
+  },
+  {
+    "Code": "FTYZB",
+    "DBCode": "YZB"
+  },
+  {
+    "Code": "QZCCB",
+    "DBCode": "BOQZ"
+  },
+  {
+    "Code": "GDRC",
+    "DBCode": "GDRCU"
+  },
+  {
+    "Code": "TSB",
+    "DBCode": "BOTS"
+  },
+  {
+    "Code": "BOJN",
+    "DBCode": "JNBANK"
+  },
+  {
+    "Code": "RCBOZ",
+    "DBCode": "ZRCBANK"
+  },
+  {
+    "Code": "BOB",
+    "DBCode": "BDCBANK"
+  },
+  {
+    "Code": "CCAB",
+    "DBCode": "CABANK"
+  },
+  {
+    "Code": "QHRC",
+    "DBCode": "BOQH"
+  },
+  {
+    "Code": "SZSCCB",
+    "DBCode": "SZSBK"
+  }
+]
