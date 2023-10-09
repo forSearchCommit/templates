@@ -1,9 +1,9 @@
 -- SELECT t1.*
 -- FROM dbo.fn_tbl_PaymentWithdrawal_new('430167', null,null,3) t1
 -- WHERE t1.PaymentTransactionNo = 'W2023092195113311';
-SELECT t1.
-		FROM dbo.fn_tbl_PaymentWithdrawal_new('430167', null,null,3) t1
-		WHERE t1.PayoutTransactionNo = 'WASCN2309229848231';
+-- SELECT t1.*
+-- 		FROM dbo.fn_tbl_PaymentWithdrawal_new('430167', null,null,3) t1
+-- 		WHERE t1.PayoutTransactionNo = 'WASCN2309245405763';
 
 -- SELECT  t1.ProviderBankCodeID,t1.ProviderID,t1.Code,t1.Name,t1.Icon
 -- FROM ProviderBankCode t1
@@ -33,3 +33,17 @@ SELECT t1.
 -- SELECT t1.* 
 -- FROM dbo.fn_tbl_Document() t1
 -- WHERE t1.ReferenceNo = @paymentTransNo AND t1.IsDelete = 0;
+DECLARE @accountId int;
+SET @accountId= 0;
+-- -- SELECT t1.*, ISNULL (T1.BankName,'''') COLLATE DATABASE_DEFAULT AS DepositDetails --WCR-663
+-- -- 		FROM dbo.fn_tbl_PaymentDeposit() t1
+-- -- 		WHERE t1.AccountID = CASE WHEN @accountId = 0 THEN t1.AccountID ELSE @accountId END
+-- 		-- AND t1.PaymentTransactionNo = 'WASCN2309245405763';
+
+
+SELECT t1.PaymentTypeID
+FROM dbo.fn_tbl_PaymentWithdrawal() t1
+WHERE t1.AccountID = CASE WHEN @accountId = 0 THEN t1.AccountID ELSE @accountId END 
+AND t1.PayoutTransactionNo = 'WASCN2309245405763';
+
+select * from PaymentType where PaymentTypeID=103
