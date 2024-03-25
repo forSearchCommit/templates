@@ -1,3 +1,0 @@
-@Imports Template__Swagger__Logs__DBMapper_.Areas.HelpPage.ModelDescriptions
-@ModelType SimpleTypeModelDescription
-@Model.Documentation
