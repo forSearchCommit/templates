@@ -1,0 +1,156 @@
+﻿2024-02-16 02:49:50,845 [9] INFO - [Deposit-Common]  Submit => Start, specialKey : DQTAPH52402169794574 
+2024-02-16 02:49:50,861 [9] INFO - [Deposit-Common]  SuccessReturnUrl => http://web-api.n8stg.com/api/Deposit/GenericSuccessful/DQTAPH52402169794574, specialKey : DQTAPH52402169794574 
+2024-02-16 02:49:50,923 [9] INFO - [QingTianPay Deposit Request Transaction Id] [DQTAPH52402169794574]
+2024-02-16 02:49:50,923 [9] INFO - [Deposit Request Hash Message1] [client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay&order_sn=DQTAPH52402169794574&ptype=3&time=1708066191&]
+2024-02-16 02:49:50,923 [9] INFO - [Deposit Request Hash Message2] [client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay&order_sn=DQTAPH52402169794574&ptype=3&time=1708066191&]
+2024-02-16 02:49:50,923 [9] INFO - [Deposit Request Hash Message3] [client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay&order_sn=DQTAPH52402169794574&ptype=3&time=1708066191&key=9cea2bf82a11d7a47f4e79f2cdf8ab1285551cc2]
+2024-02-16 02:49:50,986 [9] INFO - [QingTianPay Deposit Request] [{"client_ip":"","format":"url","goods_desc":"","mch_id":"NIu8","money":"1501.00","notify_url":"https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay","order_sn":"DQTAPH52402169794574","ptype":"3","time":"1708066191","sign":"36b13b079bc1b1b3691d5d85391ef6dd"}]
+2024-02-16 02:49:51,017 [9] INFO - [Request - QingTianPay] [{"Url":"https://vip2.asfd.xyz?c=Pay&","FormHeaders":{"Accept":"application/json"},"FormContent":{"Headers":[{"Key":"Content-Type","Value":["application/x-www-form-urlencoded"]}]},"FormMethod":{"Method":"POST"},"Proxy":null,"IsUseProxy":true,"Timeout":20,"ContentType":"application/x-www-form-urlencoded","UsingSSLProtocol":true}]
+2024-02-16 02:49:51,017 [9] INFO - [Deposit-Common]  Submit => 
+Url:https://vip2.asfd.xyz?c=Pay&
+Timeout:20 sec
+Submit Method:POST
+Header:Accept=application/json
+ContentType:application/x-www-form-urlencoded
+Content:client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https%3A%2F%2Fppay.n8stg.com%2FCommon%2FNotifyDeposit%2FQingTianPay&order_sn=DQTAPH52402169794574&ptype=3&time=1708066191&sign=36b13b079bc1b1b3691d5d85391ef6dd, specialKey : DQTAPH52402169794574 
+2024-02-16 02:49:51,673 [9] INFO - [Deposit-Common]  Submit =>  Response StatusCode : OK, specialKey : DQTAPH52402169794574 
+2024-02-16 02:49:51,673 [9] INFO - [Deposit-Common]  Submit =>  Response Header : Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Pragma: no-cache
+Cache-Control: no-store, must-revalidate, no-cache
+Date: Fri, 16 Feb 2024 06:49:51 GMT
+Set-Cookie: PHPSESSID=u7hb03a0ddp4rjsdm7a143gv0k; path=/
+Server: nginx
+, specialKey : DQTAPH52402169794574 
+2024-02-16 02:49:51,673 [9] INFO - [Deposit-Common]  Submit =>  Response Content : 
+{"code":"1","msg":"下单成功","data":{"order_sn":"MS2024021614495170765","ptype":"3","ptype_name":"支付宝转账","realname":"李奎友","account":"vdtyd7@163.com","money":"1501.00","qrcode":"http:\/\/54.169.153.24\/?c=Pay&a=info&osn=MS2024021614495170765"}}, specialKey : DQTAPH52402169794574 
+2024-02-16 02:49:51,673 [9] INFO - [Response - QingTianPay] [
+{"code":"1","msg":"下单成功","data":{"order_sn":"MS2024021614495170765","ptype":"3","ptype_name":"支付宝转账","realname":"李奎友","account":"vdtyd7@163.com","money":"1501.00","qrcode":"http:\/\/54.169.153.24\/?c=Pay&a=info&osn=MS2024021614495170765"}}]
+2024-02-16 02:52:40,689 [8] INFO - [Deposit-Common]  Submit => Start, specialKey : DUERC2402161028906 
+2024-02-16 02:52:40,689 [8] INFO - [Deposit-Common]  SuccessReturnUrl => http://h5-api.n8stg.com/api/Deposit/GenericSuccessful/DUERC2402161028906, specialKey : DUERC2402161028906 
+2024-02-16 02:52:40,720 [8] INFO - [HMACSHA256] - [Object: M001&=63843663160&=DUERC2402161028906DX1FYG2ZH3K4] [Result: 235C5295E6D88AD49F24E5D51F9B9EBC2AE9F8ECA1C55D70F1D1D61FAE5C9CAB]
+2024-02-16 02:52:40,720 [8] INFO - [Request - RoofPay] [{"Url":"http://172.26.111.71:900/api/RoofUSDT/Accept","FormHeaders":{"Accept":"application/json","Authorization":"Bearer eTh3U8WmZq4"},"FormContent":{"Headers":[{"Key":"Content-Type","Value":["application/json; charset=utf-8"]}]},"FormMethod":{"Method":"POST"},"Proxy":null,"IsUseProxy":false,"Timeout":20,"ContentType":"application/json","UsingSSLProtocol":true}]
+2024-02-16 02:52:40,720 [8] INFO - [Deposit-Common]  Submit => 
+Url:http://172.26.111.71:900/api/RoofUSDT/Accept
+Timeout:20 sec
+Submit Method:POST
+Header:Accept=application/json&Authorization=Bearer eTh3U8WmZq4
+ContentType:application/json
+Content:{"accountGroup":"USDT_New1","amount":"1000.0000","clientIP":"210.19.123.10","memberAddress":"0x1234567891023456789hdnqiendhsukjoqazuwqw","memberId":"johnaff01","memberName":"哇哇哇","merchantCode":"M001","network":"ERC-20","submitDatetime":"2024-02-16 06:52:40","timestamp":"63843663160","transactionDate":"2024-02-16 06:52:40","transactionId":"DUERC2402161028906","sign":"235C5295E6D88AD49F24E5D51F9B9EBC2AE9F8ECA1C55D70F1D1D61FAE5C9CAB"}, specialKey : DUERC2402161028906 
+2024-02-16 02:52:43,283 [8] INFO - [Deposit-Common]  Submit =>  Response StatusCode : OK, specialKey : DUERC2402161028906 
+2024-02-16 02:52:43,283 [8] INFO - [Deposit-Common]  Submit =>  Response Header : Pragma: no-cache
+Cache-Control: no-cache
+Date: Fri, 16 Feb 2024 06:52:42 GMT
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+, specialKey : DUERC2402161028906 
+2024-02-16 02:52:43,283 [8] INFO - [Deposit-Common]  Submit =>  Response Content : {"Success":1,"Message":"Success","platformNo":"DPPAY20240216065243124","cashierUrl":"https://roof-gateway.n8stg.com/RoofCashier/41F59B6977A8A8280D24AEAC73B0253EE7089CC9E53F9EC679C4A1940152C0DB","network":"ERC20","payeeAddress":"0x95b564f3b3bae3f206aa418667ba000afafacc8a","sign":"A07ADA0F6B2B1299A9464981030A1782BA9F1A8370668437DC46902D61D79C65","Amount":998.3300}, specialKey : DUERC2402161028906 
+2024-02-16 02:52:43,283 [8] INFO - [Response - RoofPay] [{"Success":1,"Message":"Success","platformNo":"DPPAY20240216065243124","cashierUrl":"https://roof-gateway.n8stg.com/RoofCashier/41F59B6977A8A8280D24AEAC73B0253EE7089CC9E53F9EC679C4A1940152C0DB","network":"ERC20","payeeAddress":"0x95b564f3b3bae3f206aa418667ba000afafacc8a","sign":"A07ADA0F6B2B1299A9464981030A1782BA9F1A8370668437DC46902D61D79C65","Amount":998.3300}]
+2024-02-16 02:52:43,298 [8] INFO - [HMACSHA256] - [Object: M001&=DPPAY20240216065243124&=DUERC2402161028906DX1FYG2ZH3K4] [Result: A07ADA0F6B2B1299A9464981030A1782BA9F1A8370668437DC46902D61D79C65]
+2024-02-16 04:15:45,445 [5] INFO - [Deposit-Common]  Submit => Start, specialKey : DUERC2402167926006 
+2024-02-16 04:15:45,445 [5] INFO - [Deposit-Common]  SuccessReturnUrl => http://web-api.n8stg.com/api/Deposit/GenericSuccessful/DUERC2402167926006, specialKey : DUERC2402167926006 
+2024-02-16 04:15:45,523 [5] INFO - [HMACSHA256] - [Object: M001&=63843668145&=DUERC2402167926006DX1FYG2ZH3K4] [Result: 4C4D4D4B95754C54B64DA1C91A66B14CF87371F9B833531C98BE9C4A4DF21BB1]
+2024-02-16 04:15:45,633 [5] INFO - [Request - RoofPay] [{"Url":"http://172.26.111.71:900/api/RoofUSDT/Accept","FormHeaders":{"Accept":"application/json","Authorization":"Bearer eTh3U8WmZq4"},"FormContent":{"Headers":[{"Key":"Content-Type","Value":["application/json; charset=utf-8"]}]},"FormMethod":{"Method":"POST"},"Proxy":null,"IsUseProxy":false,"Timeout":20,"ContentType":"application/json","UsingSSLProtocol":true}]
+2024-02-16 04:15:45,633 [5] INFO - [Deposit-Common]  Submit => 
+Url:http://172.26.111.71:900/api/RoofUSDT/Accept
+Timeout:20 sec
+Submit Method:POST
+Header:Accept=application/json&Authorization=Bearer eTh3U8WmZq4
+ContentType:application/json
+Content:{"accountGroup":"USDT_New1","amount":"100.0000","clientIP":"175.143.69.122","memberAddress":"0x1234567891023456789hdnqiendhsukjoqazuwqw","memberId":"johnaff01","memberName":"哇哇哇","merchantCode":"M001","network":"ERC-20","submitDatetime":"2024-02-16 08:15:45","timestamp":"63843668145","transactionDate":"2024-02-16 08:15:28","transactionId":"DUERC2402167926006","sign":"4C4D4D4B95754C54B64DA1C91A66B14CF87371F9B833531C98BE9C4A4DF21BB1"}, specialKey : DUERC2402167926006 
+2024-02-16 04:15:45,664 [5] INFO - [Deposit-Common]  Submit =>  Response StatusCode : OK, specialKey : DUERC2402167926006 
+2024-02-16 04:15:45,664 [5] INFO - [Deposit-Common]  Submit =>  Response Header : Pragma: no-cache
+Cache-Control: no-cache
+Date: Fri, 16 Feb 2024 08:15:45 GMT
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+, specialKey : DUERC2402167926006 
+2024-02-16 04:15:45,664 [5] INFO - [Deposit-Common]  Submit =>  Response Content : {"Success":1,"Message":"Success","platformNo":"DPPAY20240216081545651","cashierUrl":"https://roof-gateway.n8stg.com/RoofCashier/0840FE8146EC3434162BABC25832BD7722F39EA9B27CDCCDF2B981462A4C96F6","network":"ERC20","payeeAddress":"0x95b564f3b3bae3f206aa418667ba000afafacc8a","sign":"50A2B459CD7E2819398A0DC44EC829836E55689EF4E97997FDEB9890F57EF146","Amount":99.9400}, specialKey : DUERC2402167926006 
+2024-02-16 04:15:45,664 [5] INFO - [Response - RoofPay] [{"Success":1,"Message":"Success","platformNo":"DPPAY20240216081545651","cashierUrl":"https://roof-gateway.n8stg.com/RoofCashier/0840FE8146EC3434162BABC25832BD7722F39EA9B27CDCCDF2B981462A4C96F6","network":"ERC20","payeeAddress":"0x95b564f3b3bae3f206aa418667ba000afafacc8a","sign":"50A2B459CD7E2819398A0DC44EC829836E55689EF4E97997FDEB9890F57EF146","Amount":99.9400}]
+2024-02-16 04:15:45,711 [5] INFO - [HMACSHA256] - [Object: M001&=DPPAY20240216081545651&=DUERC2402167926006DX1FYG2ZH3K4] [Result: 50A2B459CD7E2819398A0DC44EC829836E55689EF4E97997FDEB9890F57EF146]
+2024-02-16 04:37:37,118 [7] INFO - [Deposit-Common]  Submit => Start, specialKey : DUERC2402167114588 
+2024-02-16 04:37:37,118 [7] INFO - [Deposit-Common]  SuccessReturnUrl => http://web-api.n8stg.com/api/Deposit/GenericSuccessful/DUERC2402167114588, specialKey : DUERC2402167114588 
+2024-02-16 04:37:37,196 [7] INFO - [HMACSHA256] - [Object: M001&=63843669457&=DUERC2402167114588DX1FYG2ZH3K4] [Result: 23E7CC3052601AD30264EC1EAE32C1DC5AB26D1603D5F2ACE33BED01EFFEBA23]
+2024-02-16 04:37:37,306 [7] INFO - [Request - RoofPay] [{"Url":"http://172.26.111.71:900/api/RoofUSDT/Accept","FormHeaders":{"Accept":"application/json","Authorization":"Bearer eTh3U8WmZq4"},"FormContent":{"Headers":[{"Key":"Content-Type","Value":["application/json; charset=utf-8"]}]},"FormMethod":{"Method":"POST"},"Proxy":null,"IsUseProxy":false,"Timeout":20,"ContentType":"application/json","UsingSSLProtocol":true}]
+2024-02-16 04:37:37,306 [7] INFO - [Deposit-Common]  Submit => 
+Url:http://172.26.111.71:900/api/RoofUSDT/Accept
+Timeout:20 sec
+Submit Method:POST
+Header:Accept=application/json&Authorization=Bearer eTh3U8WmZq4
+ContentType:application/json
+Content:{"accountGroup":"USDT_New1","amount":"100.0000","clientIP":"175.143.69.122","memberAddress":"0x1234567891023456789hdnqiendhsukjoqazuwqw","memberId":"johnaff01","memberName":"哇哇哇","merchantCode":"M001","network":"ERC-20","submitDatetime":"2024-02-16 08:37:37","timestamp":"63843669457","transactionDate":"2024-02-16 08:37:20","transactionId":"DUERC2402167114588","sign":"23E7CC3052601AD30264EC1EAE32C1DC5AB26D1603D5F2ACE33BED01EFFEBA23"}, specialKey : DUERC2402167114588 
+2024-02-16 04:37:37,337 [7] INFO - [Deposit-Common]  Submit =>  Response StatusCode : OK, specialKey : DUERC2402167114588 
+2024-02-16 04:37:37,337 [7] INFO - [Deposit-Common]  Submit =>  Response Header : Pragma: no-cache
+Cache-Control: no-cache
+Date: Fri, 16 Feb 2024 08:37:36 GMT
+Server: Microsoft-IIS/10.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+, specialKey : DUERC2402167114588 
+2024-02-16 04:37:37,337 [7] INFO - [Deposit-Common]  Submit =>  Response Content : {"Success":1,"Message":"Success","platformNo":"DPPAY20240216083737330","cashierUrl":"https://roof-gateway.n8stg.com/RoofCashier/40C3EDF5DABF989056140DA6EF5D05459B4AC3517CFA0EE8FBED0F41AE944EE3","network":"ERC20","payeeAddress":"0x95b564f3b3bae3f206aa418667ba000afafacc8a","sign":"26A77B08F85046227F5461CC0B9542A8F54FD83FDF0D2AB1397776B6AF582CC5","Amount":98.4700}, specialKey : DUERC2402167114588 
+2024-02-16 04:37:37,353 [7] INFO - [Response - RoofPay] [{"Success":1,"Message":"Success","platformNo":"DPPAY20240216083737330","cashierUrl":"https://roof-gateway.n8stg.com/RoofCashier/40C3EDF5DABF989056140DA6EF5D05459B4AC3517CFA0EE8FBED0F41AE944EE3","network":"ERC20","payeeAddress":"0x95b564f3b3bae3f206aa418667ba000afafacc8a","sign":"26A77B08F85046227F5461CC0B9542A8F54FD83FDF0D2AB1397776B6AF582CC5","Amount":98.4700}]
+2024-02-16 04:37:37,384 [7] INFO - [HMACSHA256] - [Object: M001&=DPPAY20240216083737330&=DUERC2402167114588DX1FYG2ZH3K4] [Result: 26A77B08F85046227F5461CC0B9542A8F54FD83FDF0D2AB1397776B6AF582CC5]
+2024-02-16 04:51:09,197 [40] INFO - [Deposit-Common]  Submit => Start, specialKey : DQTAPH52402161557838 
+2024-02-16 04:51:09,197 [40] INFO - [Deposit-Common]  SuccessReturnUrl => http://web-api.n8stg.com/api/Deposit/GenericSuccessful/DQTAPH52402161557838, specialKey : DQTAPH52402161557838 
+2024-02-16 04:51:09,212 [40] INFO - [QingTianPay Deposit Request Transaction Id] [DQTAPH52402161557838]
+2024-02-16 04:51:09,212 [40] INFO - [Deposit Request Hash Message1] [client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay&order_sn=DQTAPH52402161557838&ptype=3&time=1708073469&]
+2024-02-16 04:51:09,212 [40] INFO - [Deposit Request Hash Message2] [client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay&order_sn=DQTAPH52402161557838&ptype=3&time=1708073469&]
+2024-02-16 04:51:09,212 [40] INFO - [Deposit Request Hash Message3] [client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay&order_sn=DQTAPH52402161557838&ptype=3&time=1708073469&key=9cea2bf82a11d7a47f4e79f2cdf8ab1285551cc2]
+2024-02-16 04:51:09,212 [40] INFO - [QingTianPay Deposit Request] [{"client_ip":"","format":"url","goods_desc":"","mch_id":"NIu8","money":"1501.00","notify_url":"https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay","order_sn":"DQTAPH52402161557838","ptype":"3","time":"1708073469","sign":"0a5a4c905dcc523e973cd360c8edef43"}]
+2024-02-16 04:51:09,212 [40] INFO - [Request - QingTianPay] [{"Url":"https://vip2.asfd.xyz?c=Pay&","FormHeaders":{"Accept":"application/json"},"FormContent":{"Headers":[{"Key":"Content-Type","Value":["application/x-www-form-urlencoded"]}]},"FormMethod":{"Method":"POST"},"Proxy":null,"IsUseProxy":true,"Timeout":20,"ContentType":"application/x-www-form-urlencoded","UsingSSLProtocol":true}]
+2024-02-16 04:51:09,212 [40] INFO - [Deposit-Common]  Submit => 
+Url:https://vip2.asfd.xyz?c=Pay&
+Timeout:20 sec
+Submit Method:POST
+Header:Accept=application/json
+ContentType:application/x-www-form-urlencoded
+Content:client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https%3A%2F%2Fppay.n8stg.com%2FCommon%2FNotifyDeposit%2FQingTianPay&order_sn=DQTAPH52402161557838&ptype=3&time=1708073469&sign=0a5a4c905dcc523e973cd360c8edef43, specialKey : DQTAPH52402161557838 
+2024-02-16 04:51:09,853 [40] INFO - [Deposit-Common]  Submit =>  Response StatusCode : OK, specialKey : DQTAPH52402161557838 
+2024-02-16 04:51:09,853 [40] INFO - [Deposit-Common]  Submit =>  Response Header : Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Pragma: no-cache
+Cache-Control: no-store, must-revalidate, no-cache
+Date: Fri, 16 Feb 2024 08:51:09 GMT
+Set-Cookie: PHPSESSID=37ub9dmn2vuepssuu4fddd8ete; path=/
+Server: nginx
+, specialKey : DQTAPH52402161557838 
+2024-02-16 04:51:09,853 [40] INFO - [Deposit-Common]  Submit =>  Response Content : 
+{"code":"1","msg":"下单成功","data":{"order_sn":"MS2024021616510938618","ptype":"3","ptype_name":"支付宝转账","realname":"魏想生","account":"qwcxz2580@163.com","money":"1501.00","qrcode":"http:\/\/54.169.153.24\/?c=Pay&a=info&osn=MS2024021616510938618"}}, specialKey : DQTAPH52402161557838 
+2024-02-16 04:51:09,853 [40] INFO - [Response - QingTianPay] [
+{"code":"1","msg":"下单成功","data":{"order_sn":"MS2024021616510938618","ptype":"3","ptype_name":"支付宝转账","realname":"魏想生","account":"qwcxz2580@163.com","money":"1501.00","qrcode":"http:\/\/54.169.153.24\/?c=Pay&a=info&osn=MS2024021616510938618"}}]
+2024-02-16 05:24:22,945 [8] INFO - [Deposit-Common]  Submit => Start, specialKey : DQTAPH52402168384412 
+2024-02-16 05:24:22,960 [8] INFO - [Deposit-Common]  SuccessReturnUrl => http://web-api.n8stg.com/api/Deposit/GenericSuccessful/DQTAPH52402168384412, specialKey : DQTAPH52402168384412 
+2024-02-16 05:24:23,023 [8] INFO - [QingTianPay Deposit Request Transaction Id] [DQTAPH52402168384412]
+2024-02-16 05:24:23,023 [8] INFO - [Deposit Request Hash Message1] [client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay&order_sn=DQTAPH52402168384412&ptype=3&time=1708075463&]
+2024-02-16 05:24:23,023 [8] INFO - [Deposit Request Hash Message2] [client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay&order_sn=DQTAPH52402168384412&ptype=3&time=1708075463&]
+2024-02-16 05:24:23,023 [8] INFO - [Deposit Request Hash Message3] [client_ip=&format=url&goods_desc=&mch_id=NIu8&money=1501.00&notify_url=https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay&order_sn=DQTAPH52402168384412&ptype=3&time=1708075463&key=9cea2bf82a11d7a47f4e79f2cdf8ab1285551cc2]
+2024-02-16 05:24:23,101 [8] INFO - [QingTianPay Deposit Request] [{"client_ip":"","format":"url","goods_desc":"","mch_id":"NIu8","money":"1501.00","notify_url":"https://ppay.n8stg.com/Common/NotifyDeposit/QingTianPay","order_sn":"DQTAPH52402168384412","ptype":"3","time":"1708075463","sign":"bc61313544cd603626cd4b10533bca0b"}]
+2024-02-16 05:24:23,148 [8] ERROR - System.Security.XmlSyntaxException: Invalid syntax on line 1.
+   at System.Security.Util.Parser.GetRequiredSizes(TokenizerStream stream, Int32& index)
+   at System.Security.Util.Parser.ParseContents()
+   at System.Security.Util.Parser..ctor(Tokenizer t)
+   at System.Security.Cryptography.RSA.FromXmlString(String xmlString)
+   at GCT.Common.Utilities.AppCryptoHelper.EncryptRSA(String xmlPublicKey, Byte[] plainbytes) in C:\0\u\n8-project\src\GCT.Common\GCT.Common\Utilities\AppCryptoHelper.cs:line 313
+   at GCT.Manager.PaymentManagement.Vendor.QingTianPay.<>c__DisplayClass16_0.<GCT.Manager.PaymentManagement.Vendor.IDPSubmitThenHandle.CreateRequest>b__0() in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Vendor\QingTianPay.cs:line 69
+   at GCT.Manager.PaymentManagement.Utilities.CustomLogger`1.<>c__DisplayClass2_0.<LogAction>b__0(T log) in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Utilities\LoggerProxy.cs:line 48
+   at GCT.Manager.PaymentManagement.Utilities.ELKLogger.LogProcess(Action`1 loggedProcess) in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Utilities\LoggerProxy.cs:line 109
+   at GCT.Manager.PaymentManagement.Utilities.CustomLogger`1.LogAction(Action processToLog, Action`1 OnBeforeExecution, Action`1 OnAfterExecution) in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Utilities\LoggerProxy.cs:line 38
+   at GCT.Manager.PaymentManagement.Vendor.QingTianPay.GCT.Manager.PaymentManagement.Vendor.IDPSubmitThenHandle.CreateRequest(PaymentDepositEntity entity, PaymentTypeGatewaySettingEntity gateway) in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Vendor\QingTianPay.cs:line 67
+2024-02-16 05:24:23,148 [8] ERROR - [Deposit-Common]  Exception : Invalid syntax on line 1., specialKey : DQTAPH52402168384412
+2024-02-16 05:24:23,148 [8] FATAL - Invalid syntax on line 1.
+System.Security.XmlSyntaxException: Invalid syntax on line 1.
+   at System.Security.Util.Parser.GetRequiredSizes(TokenizerStream stream, Int32& index)
+   at System.Security.Util.Parser.ParseContents()
+   at System.Security.Util.Parser..ctor(Tokenizer t)
+   at System.Security.Cryptography.RSA.FromXmlString(String xmlString)
+   at GCT.Common.Utilities.AppCryptoHelper.EncryptRSA(String xmlPublicKey, Byte[] plainbytes) in C:\0\u\n8-project\src\GCT.Common\GCT.Common\Utilities\AppCryptoHelper.cs:line 313
+   at GCT.Manager.PaymentManagement.Vendor.QingTianPay.<>c__DisplayClass16_0.<GCT.Manager.PaymentManagement.Vendor.IDPSubmitThenHandle.CreateRequest>b__0() in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Vendor\QingTianPay.cs:line 69
+   at GCT.Manager.PaymentManagement.Utilities.CustomLogger`1.<>c__DisplayClass2_0.<LogAction>b__0(T log) in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Utilities\LoggerProxy.cs:line 48
+   at GCT.Manager.PaymentManagement.Utilities.ELKLogger.LogProcess(Action`1 loggedProcess) in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Utilities\LoggerProxy.cs:line 109
+   at GCT.Manager.PaymentManagement.Utilities.CustomLogger`1.LogAction(Action processToLog, Action`1 OnBeforeExecution, Action`1 OnAfterExecution) in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Utilities\LoggerProxy.cs:line 38
+   at GCT.Manager.PaymentManagement.Vendor.QingTianPay.GCT.Manager.PaymentManagement.Vendor.IDPSubmitThenHandle.CreateRequest(PaymentDepositEntity entity, PaymentTypeGatewaySettingEntity gateway) in C:\0\u\n8-project\src\GCT.Manager\GCT.Manager\GCT.Manager.PaymentManagement\Vendor\QingTianPay.cs:line 94
+   at GCT.Web.PaymentGateway.Common.SubmitDepositThenHandle.Page_Load(Object sender, EventArgs e) in C:\0\u\n8-project\src\GCT.Web\GCT.Web.PaymentGateway\GCT.Web.PaymentGateway\Common\SubmitDepositThenHandle.aspx.cs:line 67

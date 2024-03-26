@@ -1,0 +1,6 @@
+2024-01-23 21:28:30.4393|[MysteryPacket - CurrentSpin][c2d4d69b3bbe4a44b3378e9515c220a4]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at PromotionSPI.Service.CampaignSlotService.GetRunningSpin(String memberCode, String currency, String requestId) in C:\Oasis\N8_Campaign\UAT\campaign\Backend\PromotionSPI\PromotionSPI\Service\CampaignSlotService.cs:line 501
+2024-01-23 21:28:30.4393|[MysteryPacket - CurrentSpin][c2d4d69b3bbe4a44b3378e9515c220a4]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at PromotionSPI.Service.CampaignSlotService.GetRunningSpin(String memberCode, String currency, String requestId) in C:\Oasis\N8_Campaign\UAT\campaign\Backend\PromotionSPI\PromotionSPI\Service\CampaignSlotService.cs:line 501

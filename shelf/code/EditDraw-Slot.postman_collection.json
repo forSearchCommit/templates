@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "1e574a19-96c3-4537-8c1d-795df9b4bb29",
+		"name": "EditDraw-Slot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29558068",
+		"_collection_link": "https://planetary-water-916875.postman.co/workspace/N8API~b21b00db-a054-472a-aada-c00696c00b2f/collection/29558068-1e574a19-96c3-4537-8c1d-795df9b4bb29?action=share&source=collection_link&creator=29558068"
+	},
+	"item": [
+		{
+			"name": "EditDraw-Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer MB5kwDeffmcw53uRzji8rEAYp",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DrawId\" : 625\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/Slot/GetEditDraw",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"Slot",
+						"GetEditDraw"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditDraw-Submit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer MB5kwDeffmcw53uRzji8rEAYp",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DrawId\": 625,\r\n    \"IsSuccess\": true,\r\n    \"CampaignId\": 189,\r\n    \"PreStart\": \"2024-01-05T07:15:09\",\r\n    \"StartDate\": \"2024-01-05T07:25:09\",\r\n    \"EndDate\": \"2024-01-05T07:35:09\",\r\n    \"FreeSpin\": {\r\n        \"FromDate\": \"2024-01-05T07:25:09\",\r\n        \"ToDate\": \"2024-01-05T07:35:09\",\r\n        \"FromTime\": \"2024-01-05T07:25:09\",\r\n        \"ToTime\": \"2024-01-05T07:35:09\",\r\n        \"Product\": \"\",\r\n        \"Counts\": [\r\n            {\r\n                \"StakeUsdt\": 100.00,\r\n                \"StakeRmb\": 220.00,\r\n                \"Vip1\": 1,\r\n                \"Vip2\": 1,\r\n                \"Vip3\": 1,\r\n                \"Vip4\": 2,\r\n                \"Vip5\": 2,\r\n                \"Vip6\": 2,\r\n                \"Vip7\": 3,\r\n                \"Vip8\": 4\r\n            },\r\n            {\r\n                \"StakeUsdt\": 1010.00,\r\n                \"StakeRmb\": 2010.00,\r\n                \"Vip1\": 1,\r\n                \"Vip2\": 1,\r\n                \"Vip3\": 1,\r\n                \"Vip4\": 2,\r\n                \"Vip5\": 2,\r\n                \"Vip6\": 2,\r\n                \"Vip7\": 3,\r\n                \"Vip8\": 3\r\n            }\r\n        ],\r\n        \"SeparatedStakes\": []\r\n    },\r\n    \"File\": {\r\n        \"IsValid\": 1,\r\n        \"DrawId\": \"625\",\r\n        \"IsSuccess\": true,\r\n        \"windCombinationList\": [\r\n            {\r\n                \"ColumnA\": \"A\",\r\n                \"ColumnB\": \"B\",\r\n                \"ColumnC\": \"C\",\r\n                \"PrizeName\": \"FirstPrize\",\r\n                \"NewSysmboldata\": \"ABC\"\r\n            },\r\n            {\r\n                \"ColumnA\": \"A\",\r\n                \"ColumnB\": \"B\",\r\n                \"ColumnC\": \"D\",\r\n                \"PrizeName\": \"FirstPrize\",\r\n                \"NewSysmboldata\": \"ABD\"\r\n            },\r\n            {\r\n                \"ColumnA\": \"A\",\r\n                \"ColumnB\": \"B\",\r\n                \"ColumnC\": \"E\",\r\n                \"PrizeName\": \"\",\r\n                \"NewSysmboldata\": \"ABE\"\r\n            }\r\n        ],\r\n        \"prizeDrawList\": [\r\n            {\r\n                \"PrizeName\": \"FirstPrize\",\r\n                \"Qty\": 5,\r\n                \"BonusRMB\": 20.0,\r\n                \"BonusUSDT\": 20.0,\r\n                \"ChurnRollover\": 2,\r\n                \"RandAssign\": \"0\",\r\n                \"Rank\": 1\r\n            }\r\n        ],\r\n        \"consolationList\": [\r\n            {\r\n                \"PrizeName\": \"Consolation\",\r\n                \"BonusRMB\": 10.0,\r\n                \"BonusUSDT\": 10.0,\r\n                \"ChurnRollover\": 5\r\n            }\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/Slot/EditDraw",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"Slot",
+						"EditDraw"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

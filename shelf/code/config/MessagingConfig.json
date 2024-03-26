@@ -1,0 +1,108 @@
+﻿{
+  "MessagingSPIUrl": "http://spi-messaging.wlb.uat/",
+  "Key": "",
+  "Iv": "",
+  "IsEncrypt": false,
+  "InboxAllowAttachment": false,
+  "PromotionRewardCategory": 5,
+  "Subject": {
+    "en-gb": "疯狂抢红包! Bonus credited!",
+    "zh-cn": "疯狂抢红包！"
+  },
+  "Content": {
+    "en-gb": "Dear {membercode},
+
+Congratulations, you've won a lucky mystery packet.
+
+Prize details:
+Amount: {redpackvalue} {currency}
+Requires {rollover} rollover before withdrawal
+
+If you require further clarifications, please contact Customer Service Team.
+
+Sincerely yours,
+Customer Service Team",
+    "zh-cn": "尊敬的会员 【{membercode}】，您好
+恭喜，您获得一个红包
+
+红包详情：
+金额：{redpackvalue} {currency}
+{rolloverAmount} {currency} 流水才能提款 ({rollover}倍)
+奖金将在活动结束后一小时发放到您的余额里
+
+如有疑惑，请联系客服。
+
+此致，
+牛八客服团队"
+  },
+  "SPW_Prize": {
+     "Subject": {
+    "en-gb": "Spin The Wheel Bonus credited!",
+    "zh-cn": "牛牛大转盘中奖"
+  },
+  "Content": {
+    "en-gb": "恭喜您，
+
+中奖 ”{prizename}“请联系客服领取您的奖品哦，感谢一路的支持
+
+每月 8 18 28 日，千万豪奖",
+    "zh-cn": "恭喜您，
+
+中奖 ”{prizename}“请联系客服领取您的奖品哦，感谢一路的支持
+
+每月 8 18 28 日，千万豪奖"
+  }
+  },
+  "SPW_Money": {
+     "Subject": {
+    "en-gb": "Spin The Wheel Bonus credited!",
+    "zh-cn": "牛牛大转盘中奖"
+  },
+  "Content": {
+    "en-gb": "恭喜您中奖 {prizevalue} {prizecurrency}
+奖金已自动添加到您的账号，
+且奖金只需{churn}倍流水即可提现，感谢一路的支持
+每月 8 18 28 日，千万豪奖",
+    "zh-cn": "恭喜您中奖 {prizevalue} {prizecurrency}
+奖金已自动添加到您的账号，
+且奖金只需{churn}倍流水即可提现，感谢一路的支持 
+每月 8 18 28 日，千万豪奖"
+  }
+  },
+  "Slot_Prize": {
+     "Subject": {
+    "en-gb": "Slot Bonus credited!",
+    "zh-cn": "牛八龙门旋转中奖"
+  },
+  "Content": {
+    "en-gb": "恭喜您，
+
+中奖 ”{prizename}“请联系客服领取您的奖品哦，感谢一路的支持
+
+每月 8 18 28 日，千万豪奖",
+    "zh-cn": "恭喜您，
+
+中奖 ”{prizename}“请联系客服领取您的奖品哦，感谢一路的支持
+
+每月 8 18 28 日，千万豪奖"
+  }
+  },
+  "Slot_Money": {
+     "Subject": {
+    "en-gb": "Slot Bonus credited!",
+    "zh-cn": "牛八龙门旋转中奖"
+  },
+  "Content": {
+    "en-gb": "恭喜您中奖 {prizevalue} {prizecurrency}
+奖金已自动添加到您的账号，
+且奖金只需{churn}倍流水即可提现，感谢一路的支持
+每月 8 18 28 日，千万豪奖",
+    "zh-cn": "恭喜您中奖 {prizevalue} {prizecurrency}
+奖金已自动添加到您的账号，
+且奖金只需{churn}倍流水即可提现，感谢一路的支持 
+每月 8 18 28 日，千万豪奖"
+  }
+  },
+  "SlotZh": "龙门旋转！",
+  "SlotEn": "Slot Bonus credited!"
+}
