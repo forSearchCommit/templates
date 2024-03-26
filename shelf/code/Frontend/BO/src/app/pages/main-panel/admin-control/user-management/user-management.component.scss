@@ -1,0 +1,26 @@
+.btn-sm, .btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem !important;
+}
+.table th, .table td {
+    padding: 0.5rem 5px !important;
+    vertical-align: middle !important;
+}
+
+.no-wrap{
+    white-space: nowrap !important;
+
+    .btn:not(:last-child){
+        margin-right: 0.25rem !important;
+    }
+}
+
+.badge-grey {
+    background-color: #b1b1b1;
+    color: #fff;
+}
+
+.btn-disabled{
+    background-color: #cecece;
+    color: #fff;
+    cursor: not-allowed !important;
+}

@@ -1,0 +1,38 @@
+.card .card-body{
+    padding: 30px;
+}
+
+.UserDetail{
+    .title{
+        font-size: 12px;
+        color: #696969;
+        margin-bottom: 4px;
+    }
+
+    .detail{
+        font-size: 15px;
+        color: #2b2b2b;
+    }
+}
+
+.UserDetail:not(:last-child){
+    margin-bottom: 30px;
+}
+
+.table th, .table td {
+    padding: 0.5rem 5px !important;
+    vertical-align: middle !important;
+}
+
+.table-bordered td, .table-bordered th {
+    border-color: #d8dcea;
+}
+
+.thead-bg{
+    background-color: #e9ecf1;
+}
+
+.badge-grey {
+    background-color: #b1b1b1;
+    color: #fff;
+}

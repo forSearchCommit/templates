@@ -1,0 +1,23 @@
+.row.row-deck>div {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+
+.row.row-deck>div>div{
+    min-width: 100%;
+}
+
+.UserDetail{
+    .title{
+        font-size: 12px;
+        color: #696969;
+        margin-bottom: 4px;
+    }
+
+    .detail{
+        font-size: 15px;
+        color: #2b2b2b;
+    }
+}

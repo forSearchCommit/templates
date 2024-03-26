@@ -1,0 +1,206 @@
+notes
+===================================================================
+
+MMPayTransactionId= @MMPayTransactionId,
+AdjustmentTransactionNumber= @AdjustmentTransactionNumber,
+Status= @Status,
+AffiliateBalanceBeforeTransaction= @AffiliateBalanceBeforeTransaction,
+ModifiedDate= @ModifiedDate,
+ModifiedBy= @ModifiedBy,
+===================================================================
+MemberCode = x. ,
+TransactionNumber = x. ,
+TransactionDate = x. ,
+MemberCurrency = x. ,
+Amount = x. ,
+AmountAfterExchange = x. ,
+CurrencyExchangeRate = x. ,
+ModifiedDate = x. ,
+Status = x. ,
+TransactionType = x. ,
+===================================================================
+MMPayTransactionId  ,
+TransactionNumber  ,
+PayoutTransactionNumber  ,
+AdjustmentTransactionNumber  ,
+MemberCode  ,
+AffiliateCode  ,
+CredentialID  ,
+SubCredentialID  ,
+MemberCurrency  ,
+Status ,
+Active ,
+AffiliateBalanceBeforeTransaction  ,
+Amount  ,
+AmountAfterExchange  ,
+CurrencyExchangeRate  ,
+ReverseExchangeRate  ,
+CommissionRate  ,
+Churn ,
+RemarkType ,
+Remark  ,
+CreatedDate  ,
+CreatedBy  ,
+ModifiedDate  ,
+ModifiedBy  ,
+NotifyUrl  ,
+TransactionType ,
+TransactionDate  
+
+
+use Affiliate_P003
+DECLARE
+ @TransactionNumber NVARCHAR(MAX) ,
+    @MemberCode NVARCHAR(MAX),
+    @AffiliateCode NVARCHAR(MAX),
+    @MemberCurrency NVARCHAR(10) ,
+    @Status INT ,
+    @ModifiedDateFrom DATETIME ,
+    @ModifiedDateTo DATETIME ,
+    @TransactionDateFrom DATETIME ,
+    @TransactionDateTo DATETIME
+
+SET @TransactionNumber = NULL;
+SET @MemberCode = NULL;
+SET @AffiliateCode = '083778';
+SET @MemberCurrency = NULL;
+SET @Status = NULL;
+SET @ModifiedDateFrom = NULL;
+SET @ModifiedDateTo = NULL;
+SET @TransactionDateFrom = NULL;
+SET @TransactionDateTo = NULL;
+
+SET @TransactionNumber = 'W2024022032971682';
+SET @MemberCode = 'kcUserR01';
+SET @AffiliateCode = '083778';
+SET @MemberCurrency = 'RMB';
+SET @Status = '0';
+SET @ModifiedDateFrom = '2024-01-20 03:05:27.000';
+SET @ModifiedDateTo = '2024-03-20 03:05:27.000';
+SET @TransactionDateFrom = '2024-01-20 03:05:27.000';
+SET @TransactionDateTo = '2024-03-20 03:05:27.000';
+
+SELECT
+    *
+FROM [Affiliate].[MMPayTransactionDetails] B WHERE
+    (@TransactionNumber IS NOT NULL AND B.TransactionNumber = @TransactionNumber OR @TransactionNumber IS NULL)
+    AND
+    (@MemberCode IS NOT NULL AND B.MemberCode = @MemberCode OR @MemberCode IS NULL)
+    AND
+    (@MemberCurrency IS NOT NULL AND B.MemberCurrency = @MemberCurrency OR @MemberCurrency IS NULL)
+    AND
+    (@Status IS NOT NULL AND B.Status = @Status OR @Status IS NULL)
+    AND
+    (@ModifiedDateFrom IS NOT NULL AND B.ModifiedDate >= @ModifiedDateFrom OR @ModifiedDateFrom IS NULL)
+    AND
+    (@ModifiedDateTo IS NOT NULL AND B.ModifiedDate <= @ModifiedDateTo OR @ModifiedDateTo IS NULL)
+    AND
+    (@TransactionDateFrom IS NOT NULL AND B.TransactionDate >= @TransactionDateFrom OR @TransactionDateFrom IS NULL)
+    AND
+    (@TransactionDateTo IS NOT NULL AND B.TransactionDate <= @TransactionDateTo OR @TransactionDateTo IS NULL)
+    AND B.AffiliateCode = @AffiliateCode
+=============================================================================
+USE GCT_P003
+SELECT TOP 5 * FROM Providers ORDER BY ProviderID DESC
+SELECT TOP 5 * FROM PaymentType ORDER BY PaymentTypeID DESC
+SELECT TOP 5 * FROM PaymentTypeGatewaySetting ORDER BY PaymentTypeGatewaySettingID DESC
+SELECT TOP 5 * FROM PaymentTypeGatewaySecureKey ORDER BY SecureKeyID DESC
+SELECT TOP 5 * FROM PaymentOptionRoutingRulesSetting ORDER BY RoutingRulesSettingID DESC
+SELECT * FROM PaymentOption
+SELECT * FROM PaymentOptionType
+==============================================================================
+DECLARE 
+	@PaymentTypeId INT,					
+	@ProviderID INT,								
+	@PaymentTypeGatewaySettingID INT,	
+	@PaymentOptionID INT,					
+	@PaymentOptionTypeID INT = 2,
+	@TransactionPrefix VARCHAR(50) = 'DQTAPH5',
+	@ProviderName NVARCHAR(50) = N'QingTianPay',
+	@PaymentTypeDesc NVARCHAR (50) = N'QingTian-AlipayH5',
+	@currencyCode NVARCHAR (10) = N'RMB',
+	@userCreated NVARCHAR (10) = N'N8PAY-180';
+
+SELECT @PaymentTypeId = PaymentTypeID + 1
+FROM PaymentType
+ORDER BY PaymentTypeID DESC
+OFFSET 1 ROWS
+FETCH NEXT 1 ROWS ONLY;
+
+SELECT @ProviderID = ProviderID + 2
+FROM Providers
+ORDER BY ProviderID DESC
+OFFSET 1 ROWS
+FETCH NEXT 1 ROWS ONLY;
+
+SELECT @PaymentTypeGatewaySettingid = PaymentTypeGatewaySettingID + 2
+FROM PaymentTypeGatewaySetting
+ORDER BY PaymentTypeGatewaySettingID DESC
+OFFSET 1 ROWS
+FETCH NEXT 1 ROWS ONLY;
+
+SELECT @PaymentOptionID = PaymentOptionID 
+FROM PaymentOption WHERE PaymentOptionTypeID = @PaymentOptionTypeID
+
+SELECT @PaymentTypeId
+SELECT @ProviderID
+SELECT @PaymentTypeGatewaySettingID
+SELECT @PaymentOptionID
+=============================================================================
+-- select * from PaymentType order by PaymentTypeID desc 
+-- SELECT * FROM Providers ORDER BY ProviderID DESC
+-- SELECT * FROM PaymentTypeGatewaySetting ORDER BY PaymentTypeGatewaySettingID DESC
+
+-- SELECT * FROM PaymentOption WHERE PaymentOptionTypeID = 2
+-- SELECT * FROM PaymentOptionType --2
+-- SELECT * FROM PaymentOptionRoutingRulesSetting WHERE PaymentTypeGatewaySettingID = 1111
+-- SELECT * FROM TransactionType
+
+-- SELECT PaymentTypeID
+-- FROM PaymentType
+-- ORDER BY PaymentTypeID DESC
+-- OFFSET 1 ROWS
+-- FETCH NEXT 1 ROWS ONLY;
+
+-- SELECT * FROM PaymentTypeGatewaySecureKey ORDER BY SecureKeyID Desc
+
+-- //crypted:123123
+
+
+-- select * from PaymentOptionType where PaymentOptionTypeID = 8
+-- select * from PaymentOption where PaymentOptionTypeID = 8
+USE GCT_P003
+DECLARE 
+	@PaymentTypeId INT,					
+	@ProviderID INT,								
+	@PaymentTypeGatewaySettingID INT,	
+	@PaymentOptionID INT,						
+	@PaymentOptionTypeID INT = 8,
+	@TransactionPrefix VARCHAR(50) = 'WJBPCN',
+	@ProviderName NVARCHAR(50) = N'JuBaoPenPay',
+	@PaymentTypeDesc NVARCHAR (50) = N'JuBaoPen-Withdrawal',
+	@currencyCode NVARCHAR (10) = N'RMB',
+	@userCreated NVARCHAR (10) = N'N8PAY-131';
+
+SELECT @PaymentTypeId = PaymentTypeID + 1
+FROM PaymentType
+ORDER BY PaymentTypeID DESC
+OFFSET 1 ROWS
+FETCH NEXT 1 ROWS ONLY;
+
+SELECT @ProviderID = ProviderID + 2
+FROM Providers
+ORDER BY ProviderID DESC
+OFFSET 1 ROW
+FETCH NEXT 1 ROWS ONLY;
+
+SELECT @PaymentTypeGatewaySettingid = PaymentTypeGatewaySettingID + 2
+FROM PaymentTypeGatewaySetting
+ORDER BY PaymentTypeGatewaySettingID DESC
+OFFSET 1 ROWS
+FETCH NEXT 1 ROWS ONLY;
+
+SELECT @PaymentOptionID = PaymentOptionID 
+FROM PaymentOption WHERE PaymentOptionTypeID = @PaymentOptionTypeID AND TransactionTypeID = 3020
+
+select @PaymentOptionID, @ProviderID, @PaymentTypeGatewaySettingID, @PaymentTypeId

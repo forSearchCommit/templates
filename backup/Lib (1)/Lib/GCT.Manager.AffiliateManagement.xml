@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GCT.Manager.AffiliateManagement</name>
+    </assembly>
+    <members>
+        <member name="T:GCT.Manager.AffiliateManagement.DAL.AffiliateManagerDAL">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="T:GCT.Manager.AffiliateManagement.Manager.AffiliateManager">
+            <summary>
+            TODO: Update summary.
+            </summary>
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="T:GCT.Manager.AffiliateManagement.Manager.IAffiliateManager">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="P:GCT.Manager.AffiliateManagement.Utilities.AffiliateCodeUtility.DefaultAffiliateCode">
+            <summary>
+            A fallback code to return should everything else fail.
+            </summary>
+        </member>
+        <member name="P:GCT.Manager.AffiliateManagement.Utilities.AffiliateCodeUtility.DomainMapFile">
+            <summary>
+            An absolute path to the CSV file or the file content.
+            </summary>
+        </member>
+        <member name="P:GCT.Manager.AffiliateManagement.Utilities.AffiliateCodeUtility.AffiliateCodeCookieName">
+            <summary>
+            Affiliate Code cookie name to search with in the HttpCookieCollection. Default is "AffCode".
+            </summary>
+        </member>
+        <member name="P:GCT.Manager.AffiliateManagement.Utilities.AffiliateCodeUtility.OverwriteCookie">
+            <summary>
+            Gets or sets the rule whether to replace existing cookie value. Default is False.
+            </summary>
+        </member>
+        <member name="P:GCT.Manager.AffiliateManagement.Utilities.AffiliateCodeUtility.CookieExpiryDuration">
+            <summary>
+            Number of day until cookie expiration. Default is 7.
+            </summary>
+        </member>
+        <member name="M:GCT.Manager.AffiliateManagement.Utilities.AffiliateCodeUtility.#ctor(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes an Affiliate-Code-assignment utility.
+            </summary>
+            <param name="defaultAffiliateCode">An Affiliate Code to return should all code-acquiring methods fail.</param>
+            <param name="domainMapFile">An absolute path to the CSV file or the file content.</param>
+            <param name="affiliateCodeCookieName">Affiliate Code cookie name. Default is "AffCode".</param>
+            <param name="mapFileAsContent">True if domainMapFileName is the content file instead of the file path; otherwise, false.</param>
+            <exception cref="T:System.ArgumentNullException">domainMapFileName is null.</exception>
+        </member>
+        <member name="M:GCT.Manager.AffiliateManagement.Utilities.AffiliateCodeUtility.GetAffiliateCode">
+            <summary>
+            Gets the preferred Affiliate Code for member registration purposes based on the current business rules.
+            <para>Comprised of 3 sequential code-acquiring methods, this process was designed in compliance with WCR-1015.</para>
+            </summary>
+            <returns>The preferred Affiliate Code.</returns>
+        </member>
+        <member name="T:GCT.Manager.AffiliateManagement.Utilities.CsvUtility">
+            <summary>
+            Incredibly simple CSV parsing utility, written by yomanto.taro@xuenn.com.
+            <para>Consider using the more dedicated one as you scale. See https://www.nuget.org/packages/CsvHelper />.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

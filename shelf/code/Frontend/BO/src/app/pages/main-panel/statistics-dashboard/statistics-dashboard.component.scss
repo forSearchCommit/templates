@@ -1,0 +1,27 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+
+    .paging {
+        margin-right: 20px;
+    }
+
+    .items-per-page {
+        a {
+            margin: 0 10px;
+        }
+    }
+}
+
+.btn-sm, .btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem !important;
+}
+
+.no-wrap{
+    white-space: nowrap !important;
+
+    .btn:not(:last-child){
+        margin-right: 0.25rem !important;
+    }
+}

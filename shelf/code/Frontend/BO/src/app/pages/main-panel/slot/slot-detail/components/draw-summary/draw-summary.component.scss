@@ -1,0 +1,72 @@
+.input-upload-group{
+    position: relative;
+    display: flex;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    width: 100%;
+
+    .btn-browse{
+        background-color: #ced4da;
+        color: #2f2f2f;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 0;
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+    }
+    
+    .input-upload{
+        /* height: calc(1.5em + 0.75rem + 8px); */
+        cursor: pointer;
+        border: 0px;
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0);
+    }
+    
+    .input-upload:focus{
+        outline: 0;
+        box-shadow: none;
+    }
+    
+    .input-upload[type=file]::-webkit-file-upload-button {
+        display: none;
+    }
+}
+
+.input-upload-group:hover{
+    border-color: #98a2db;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(63, 81, 181, 0.25);
+}
+
+.text-align-left{
+    text-align: left;
+}
+
+
+  .white-border-cell {
+    border-right: 2px solid rgb(255, 255, 255); /* Set the border color to white */
+    padding: 20px; /* Add padding to the cells as needed */
+  }
+
+  .min-width-10 {
+    min-width: 100px
+  }
+
+  .min-width-20 {
+    min-width: 200px
+  }
+
+  .min-width-25 {
+    min-width: 250px
+  }
+
+  .min-width-30 {
+    min-width: 300px
+  }
