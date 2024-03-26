@@ -1,0 +1,71 @@
+<app-breadcrumb [title]="'User Group'" [items]="" [active_item]="'User Group'"></app-breadcrumb>
+<app-edit-user-group (refreshData)="getData()"></app-edit-user-group>
+<app-add-user-group (refreshData)="getData()"></app-add-user-group>
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="card">
+            <div class="row p-3">
+                <div class="col-8">
+                    <div class="pagination">
+                        <div class="paging">
+                            <ngb-pagination [collectionSize]="TotalRecord" [pageSize]='showPerPage' [(page)]="page"
+                                (pageChange)="getData()">
+                            </ngb-pagination>
+                        </div>
+                        <div class="items-per-page">
+                            Show:
+                            <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                                [(ngModel)]="showPerPage" (ngModelChange)="getData()">
+                                <label class="btn-primary" ngbButtonLabel>
+                                    <input type="radio" ngbButton [value]="50"> 50
+                                </label>
+                                <label class="btn-primary" ngbButtonLabel>
+                                    <input type="radio" ngbButton [value]="100">
+                                    100
+                                </label>
+                                <label class="btn-primary" ngbButtonLabel>
+                                    <input type="radio" ngbButton [value]="150">
+                                    150
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" *ngIf="IsAccessible(accesslist.Add_User_Group)">
+                    <button class="btn btn-primary float-right" (click)="AddUserGroup()">Add New User Group</button>
+                </div>
+                
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Role Type</th>
+                            <th scope="col">Role Name</th>
+                            <th scope="col">Currency</th>
+                            <th scope="col" *ngIf="IsAccessible(accesslist.Edit_User_Group)">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usergroup of UserGroups; index as i">
+                            <td scope="row" >{{i+1}}</td>
+                            <td scope="row" >{{usergroup.RoleType}}</td>
+                            <td scope="row" >{{usergroup.RoleName}}</td>
+                            <td scope="row" >{{usergroup.Currency.join(", ")}}</td>
+                            <td scope="row" class="no-wrap" *ngIf="IsAccessible(accesslist.Edit_User_Group)">
+                                <button class="btn btn-sm btn-primary" (click)="EditUserGroup(usergroup.RoleType)">Edit</button>
+                                <button class="btn btn-sm btn-danger" (click)="DeleteUserGroup(usergroup.RoleType)">Delete</button>
+                                <!-- <button class="btn btn-sm btn-danger">Delete</button> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+</div>

@@ -1,0 +1,49 @@
+<ng-template #ImportMemberMdl let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            Import Member Winning Combinations & Prize
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form class="form needs-validation" autocomplete="off" #addEligibleMember="ngForm" (ngSubmit)="submit(addEligibleMember)"
+        novalidate [ngClass]="{'was-validated': formValidated}">
+        <div class="modal-body">
+            <div class="mt-3 p-3">
+                <div class="row">
+                    <label class="col pl-0">
+                        Select File:
+                        <span style="color: red;">*</span>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 p-0 m-0">
+                        <div class="custom-datepicker custom-datepicker-dropdown">
+                            <div class="form-group mb-0">
+                                <div class="input-group">
+                                    <div class="input-upload-group">
+                                        <input class="form-control input-upload" type="file" name="import_file"
+                                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                            (change)="onFileChange($event)" #inputFile />
+                                        <span class="btn-browse">Browse</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 d-flex align-items-center">
+                        <button class="btn button-like-link" (click)="exportAll()">Download Current Member List</button>
+                    </div>
+                    <div class="text-danger" *ngIf="noFile" style="margin-top: 0.3rem; margin-left: -0.5rem;">
+                        <i class="fa fa-exclamation-circle mr-1"></i>Please upload file in correct format
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+</ng-template>

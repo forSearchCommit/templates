@@ -1,0 +1,135 @@
+<ng-template #ImportedPrizeCheckMdl let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            Winning Combinations & Prize Check
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+
+    <div class="modal-body">
+        <h2 class="modal-title">
+            Prize
+        </h2>
+    
+    
+   
+        <!--Prize-->
+        <div class="">
+            <div class="table-responsive">
+                <table class="table border border-3 border-white" style="background-color: lightgrey;">
+                    <thead class="text-align-left" style="background-color: grey;"> 
+                        <tr>
+                            <th scope="col" class="white-border-cell min-width-25" style="color: white;" >Prize Name</th>
+                            <th scope="col" class="white-border-cell min-width-10" style="color: white;" >Qty</th>
+                            <th scope="col" class="white-border-cell min-width-20" style="color: white;" >Bonus RMB</th>
+                            <th scope="col" class="white-border-cell min-width-20" style="color: white;" >Bonus USDT</th>
+                            <th scope="col" class="white-border-cell min-width-10" style="color: white;" >Churn Rollover Multiplier</th>
+                            <th scope="col" class="white-border-cell min-width-10" style="color: white;" >Random Assign</th>
+                            <th scope="col" class="white-border-cell min-width-10" style="color: white;" >Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of prizeLst; index as i">
+                            <ng-container>
+                                <ng-container [ngTemplateOutlet]="templatePrize"
+                                    [ngTemplateOutletContext]="{ $implicit: item }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+                        
+                        <ng-template #templatePrize let-item>
+                            <td scope="row" class="white-border-cell min-width-25" >{{item.PrizeName}}</td>
+                             <td scope="row" class="white-border-cell min-width-10" >{{ item.Qty }}</td>
+                             <td scope="row" class="white-border-cell min-width-20" >{{ item.BonusRMB }}</td>
+                             <td scope="row" class="white-border-cell min-width-20" >{{ item.BonusUSDT }}</td>
+                             <td scope="row" class="white-border-cell min-width-10" >{{ item.ChurnRollover }}</td>
+                             <td scope="row" class="white-border-cell min-width-10" >{{ item.RandAssign === '1' ? 'TRUE' : 'FALSE' }}</td>
+                             <td scope="row" class="white-border-cell min-width-10" >{{ item.Rank }}</td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h2 class="modal-title">
+            Consolation Prize
+        </h2>
+
+        <!--Consolation Prize-->
+        <div class="">
+            <div class="table-responsive">
+                <table class="table border border-3 border-white" style="background-color: lightgrey;">
+                    <thead class="text-align-left" style="background-color: grey;"> 
+                        <tr>
+                            <th scope="col" class="white-border-cell min-width-25" style="color: white;" >Prize Name</th>
+                            <th scope="col" class="white-border-cell min-width-20" style="color: white;" >Bonus RMB</th>
+                            <th scope="col" class="white-border-cell min-width-20" style="color: white;" >Bonus USDT</th>
+                            <th scope="col" class="white-border-cell min-width-10" style="color: white;" >Churn Rollover Multiplier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of conPrizeLst; index as i">
+                            <ng-container>
+                                <ng-container [ngTemplateOutlet]="templateConPrize"
+                                    [ngTemplateOutletContext]="{ $implicit: item }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templateConPrize let-item>
+                            <td scope="row" class="white-border-cell min-width-25" >{{item.PrizeName}}</td>
+                             <td scope="row" class="white-border-cell min-width-20" >{{ item.BonusRMB }}</td>
+                             <td scope="row" class="white-border-cell min-width-20" >{{ item.BonusUSDT }}</td>
+                             <td scope="row" class="white-border-cell min-width-10" >{{ item.ChurnRollover }}</td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h2 class="modal-title">
+            Winning Combinations
+        </h2>
+
+        <!--Winning Combinations-->
+        <div class="">
+            <div class="table-responsive">
+                <table class="table border border-3 border-white" style="background-color: lightgrey;">
+                    <thead class="text-align-left" style="background-color: grey;"> 
+                        <tr>
+                            <th scope="col" class="white-border-cell min-width-10" style="color: white;" >Column 1</th>
+                            <th scope="col" class="white-border-cell min-width-10" style="color: white;" >Column 2</th>
+                            <th scope="col" class="white-border-cell min-width-10" style="color: white;" >Column 3</th>
+                            <th scope="col" class="white-border-cell min-width-30" style="color: white;" >Prize Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of winComLst; index as i">
+                            <ng-container>
+                                <ng-container [ngTemplateOutlet]="templateWinCom"
+                                    [ngTemplateOutletContext]="{ $implicit: item }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templateWinCom let-item>
+                            <td scope="row" class="white-border-cell min-width-10" >{{item.ColumnA}}</td>
+                             <td scope="row" class="white-border-cell min-width-10" >{{ item.ColumnB }}</td>
+                             <td scope="row" class="white-border-cell min-width-10" >{{ item.ColumnC }}</td>
+                             <td scope="row" class="white-border-cell min-width-30" >{{ item.PrizeName }}</td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+      
+    <div class="modal-footer" *ngIf="loaded">
+        <button class="btn btn-outline-dark" (click)="modal.close('Close click')">Back</button>
+    </div>
+</ng-template>

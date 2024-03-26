@@ -1,0 +1,190 @@
+<app-breadcrumb [title]="'Dashboard'" [items]="" [active_item]="'Dashboard'"></app-breadcrumb>
+
+<app-add-promotion (refreshData)="getData()"></app-add-promotion>
+<app-edit-promotion (refreshData)="getData()"></app-edit-promotion>
+
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="card">
+            <div class="row p-3">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="Status">Promotion Type</label>
+                        <select class="form-control" id="PromotionType" [(ngModel)]="promoTypeId" name="PromotionType">
+                            <option value="">All</option>
+                            <option value="1">Hong Bao</option>
+                            <option value="2">Spin The Wheel</option>
+                            <option value="3">Niu8 Slots</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3">
+                    <button style="float: right;" class="btn btn-primary" type="button"
+                        (click)="btnSearch()">Search</button>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-8">
+                    <div class="pagination">
+                        <div class="paging">
+                            <ngb-pagination [collectionSize]="TotalRecord" [pageSize]='showPerPage' [(page)]="page"
+                                (pageChange)="getData()" [maxSize]="5" [rotate]="true" [boundaryLinks]="true">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col">
+                    <div class="items-per-page">
+                        Show:
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                            [(ngModel)]="showPerPage" (ngModelChange)="getData()">
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="50">
+                                50
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="100">
+                                100
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="150">
+                                150
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- *ngIf="IsAccessible(accesslist.Add_User_Group)" -->
+                    <button class="btn btn-primary float-right" (click)="AddPromotion()">Generate New Promotion</button>
+                </div>
+            </div>
+
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Promotion</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Date Start</th>
+                            <th scope="col">Date End</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Show Icon</th>
+                            <th scope="col" *ngIf="IsAccessible(accesslist.Edit_User_Group)">Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="myTr" *ngFor="let promotionlist of PromotionList; index as i">
+                            <ng-container *ngIf="promotionlist.Status !== 3">
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    {{promotionlist.RowId }}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    <a *ngIf="promotionlist.TypeId == 1"
+                                        href="/dashboard/promotion/{{promotionlist.RowId}}">
+                                        {{promotionlist.Title}}
+                                    </a>
+                                    <a *ngIf="promotionlist.TypeId == 2"
+                                        href="/dashboard/spinwheel/{{promotionlist.RowId}}">
+                                        {{promotionlist.Title}}
+                                    </a>
+                                    <a *ngIf="promotionlist.TypeId == 3"
+                                        href="/dashboard/slot/{{promotionlist.RowId}}">
+                                        {{promotionlist.Title}}
+                                    </a>
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    {{promotionlist.Type}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    {{promotionlist.StartDate | date:'yyyy/MM/dd'}}<br>{{promotionlist.StartDate |
+                                    date:'HH:mm:ss'}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    {{promotionlist.EndDate | date:'yyyy/MM/dd'}}<br>{{promotionlist.EndDate |
+                                    date:'HH:mm:ss'}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    <div [ngSwitch]="promotionlist.Status">
+                                        <div *ngSwitchCase="1">
+                                            <span *ngIf="checkDateRange(promotionlist)">
+                                                Active
+                                            </span>
+                                            <span *ngIf="!checkDateRange(promotionlist)">
+                                                Pending
+                                            </span>
+                                        </div>
+                                        <div *ngSwitchCase="2">Expired</div>
+                                        <div *ngSwitchCase="3">Disable</div>
+                                        <!-- <div *ngSwitchCase="4">Expired</div> -->
+                                    </div>
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    <div *ngIf="promotionlist.TypeId == 2" style="cursor: pointer;"
+                                        [ngStyle]="{'color': promotionlist.FEShow == 1 ? 'blue' : 'red'}"
+                                        (click)="toggleIcon(promotionlist.RowId, promotionlist.Title, promotionlist.FEShow, promotionlist.Status)">
+                                        {{promotionlist.FEShow == 1 ? 'Yes' : 'No'}}</div>
+                                </td>
+                                <td scope="row" class="no-wrap" *ngIf="IsAccessible(accesslist.Edit_User_Group)">
+                                    <!-- <button class="btn btn-sm btn-primary" [disabled]="promotionlist.Status!=1"
+                                        (click)="toggleIcon(promotionlist.RowId, promotionlist.Title, promotionlist.FEShow)">{{ promotionlist.FEShow == 1 ? 'Hide Icon' : 'Show Icon'}}</button> -->
+                                    <button class="btn btn-sm btn-primary" [disabled]="promotionlist.Status!=1"
+                                        (click)="EditPromotion(promotionlist)">Edit</button>
+                                    <button class="btn btn-sm btn-danger"
+                                        (click)="DisablePromotion(promotionlist.RowId, promotionlist.Title)"
+                                        [disabled]="promotionlist.Status!=1">Disable</button>
+                                </td>
+                            </ng-container>
+                        </tr>
+                        <tr class="myTr" *ngFor="let promotionlist of PromotionList; index as i">
+                            <ng-container *ngIf="promotionlist.Status === 3">
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    {{promotionlist.RowId }}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    <a href="/dashboard/promotion/{{promotionlist.RowId}}">
+                                        {{promotionlist.Title}}
+                                    </a>
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    {{promotionlist.StartDate | date:'yyyy/MM/dd'}}<br>{{promotionlist.StartDate |
+                                    date:'HH:mm:ss'}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    {{promotionlist.EndDate | date:'yyyy/MM/dd'}}<br>{{promotionlist.EndDate |
+                                    date:'HH:mm:ss'}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color':promotionlist.Status != 3 ? 'black' : 'grey' }">
+                                    <div [ngSwitch]="promotionlist.Status">
+                                        <div *ngSwitchCase="1">
+                                            Active
+                                        </div>
+                                        <div *ngSwitchCase="2">Completed</div>
+                                        <div *ngSwitchCase="3">Disable</div>
+                                    </div>
+                                </td>
+                                <td scope="row" class="no-wrap" *ngIf="IsAccessible(accesslist.Edit_User_Group)">
+                                    <button class="btn btn-sm btn-primary" [disabled]="promotionlist.Status!=1"
+                                        (click)="EditPromotion(promotionlist)">Edit</button>
+                                    <button class="btn btn-sm btn-danger"
+                                        (click)="DisablePromotion(promotionlist.RowId, promotionlist.Title)"
+                                        [disabled]="promotionlist.Status!=1">Disable</button>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+</div>

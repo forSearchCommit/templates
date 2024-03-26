@@ -1,0 +1,45 @@
+<ng-template #AddModalContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            Add User Group
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form class="form needs-validation" autocomplete="off" #addGroup="ngForm" (ngSubmit)="submit(addGroup)" novalidate
+        [ngClass]="{'was-validated': formValidated}">
+        <div class="modal-body">
+            <div class="mb-3 row">
+                <label class="col-3 col-form-label">Role Type</label>
+                <div class="col-9">
+                    <input class="form-control" name="RoleType" type="text" autocomplete="off" required ngModel>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-3 col-form-label">Role Name</label>
+                <div class="col-9">
+                    <input class="form-control" name="RoleName" type="text" autocomplete="off" required ngModel>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-3 col-form-label">Currency</label>
+                <div class="col-9 row">
+                    <label class="d-block m-1" for="chk-RMB">
+                        <input class="checkbox_animated" id="chk-RMB" name="currency_RMB" type="checkbox" ngModel>
+                        RMB
+                    </label>
+                    <label class="d-block m-1" for="chk-USDT">
+                        <input class="checkbox_animated" id="chk-USDT" name="currency_USDT" type="checkbox" ngModel>
+                        USDT
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+</ng-template>

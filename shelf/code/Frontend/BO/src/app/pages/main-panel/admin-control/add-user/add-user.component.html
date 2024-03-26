@@ -1,0 +1,83 @@
+<app-breadcrumb [title]="'Create New User'" [items]="['Admin Control', 'User Management']" [active_item]="'Add User'">
+</app-breadcrumb>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <form class="form needs-validation" autocomplete="off" #addNewUserForm="ngForm"
+                    (ngSubmit)="createNewUser(addNewUserForm)" novalidate [ngClass]="{'was-validated': formValidated}">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="userid">User ID</label>
+                                    <input class="form-control" name="userid" type="text" autocomplete="off" required
+                                        ngModel>
+                                    <small>*Min 8-16 characters & alphanumeric</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input class="form-control" name="password" type="password"
+                                        autocomplete="new-password" required ngModel>
+                                    <small>*Min 8-16 characters & alphanumeric</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input class="form-control" name="name" type="text" autocomplete="off" required
+                                        ngModel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" name="email" type="email" autocomplete="off" required
+                                        ngModel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="roletype">Role Type</label>
+                                    <select class="form-control" name="roletype" required ngModel>
+                                        <ng-container *ngFor="let role of RoleList, index as i">
+                                            <option value="{{role.Value}}">{{role.Text}}</option>
+                                        </ng-container>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control" name="status" required ngModel>
+                                        <option value="1">Active</option>
+                                        <option value="0">Disabled</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <!-- <input class="btn btn-light ml-1" type="reset" value="Cancel"> -->
+                        <button class="btn btn-light ml-1" type="button"
+                            routerLink="/dashboard/user-management">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

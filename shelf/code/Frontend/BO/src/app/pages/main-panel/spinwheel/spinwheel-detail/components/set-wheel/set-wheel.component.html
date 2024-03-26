@@ -1,0 +1,78 @@
+<ng-template #SpwSetWheelMdl let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            Set Spinwheel
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <form *ngIf="loaded" class="form needs-validation" autocomplete="off" #addPromotion="ngForm" (ngSubmit)="submit(addPromotion)"
+        novalidate [ngClass]="{'was-validated': formValidated}">
+        <div class="modal-body">
+            <div>
+                <div *ngFor="let vw of wheelList; index as i">
+                    <h6 class="modal-title">Wheel Piece {{i+1}}</h6>
+                    <div class="p-3 row">
+                        <div class="col-5"  >
+                            <div><img [src]="vw.ImgURL" alt="vw.Code" width="100%" height="100%"></div>
+                        </div>
+                        <div class="col-7">
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <div class="row mt-3" style="padding-right:10px">
+                                        <label>Code</label>
+                                        <div class="input-group">
+                                            <input class="form-control" autocomplete="off" placeholder="Code"
+                                                name="Code" [(ngModel)]="vw.Code" [ngModelOptions]="{standalone: true}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3" style="padding-right:10px">
+                                        <label>Name</label>
+                                        <div class="input-group">
+                                            <input class="form-control" autocomplete="off" placeholder="Name"
+                                                name="Code" [(ngModel)]="vw.Name" [ngModelOptions]="{standalone: true}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3" style="padding-right:10px">
+                                        <label>Display Name</label>
+                                        <div class="input-group">
+                                            <input class="form-control" autocomplete="off" placeholder="Display Name"
+                                                name="Code" [(ngModel)]="vw.DisplayName" [ngModelOptions]="{standalone: true}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row mt-3" style="padding-right:10px">
+                                        <label>Position</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="position" [(ngModel)]="vw.Position" [ngModelOptions]="{standalone: true}" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3" style="padding-right:10px">
+                                        <label>Prize Category<span style="color: red;">*</span></label>
+                                        <select class="form-control" name="PrizeGrp" [(ngModel)]="vw.PrizeGrpId" [ngModelOptions]="{standalone: true}">
+                                            <option value="">Select</option>
+                                            <option value="{{itm.Id}}"
+                                                *ngFor="let itm of prizeGrpList">
+                                                {{itm.Code}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        <hr style="border-top: 3px solid #bbb">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" (click)="update()">Submit</button>
+            <button class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+</ng-template>

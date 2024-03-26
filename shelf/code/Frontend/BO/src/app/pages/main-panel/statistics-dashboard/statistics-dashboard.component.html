@@ -1,0 +1,123 @@
+<app-breadcrumb [title]="'Statistic Report'" [items]="" [active_item]="'Statistics Dashboard'"></app-breadcrumb>
+
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="card">
+            <div class="row p-3">
+                <div class="col-8">
+                    <div class="pagination">
+                        <div class="paging">
+                            <ngb-pagination [collectionSize]="TotalRecord" [pageSize]='showPerPage' [(page)]="page"
+                                (pageChange)="getData()" [maxSize]="5" [rotate]="true" [boundaryLinks]="true">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col">
+                    <div class="items-per-page">
+                        Show:
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                            [(ngModel)]="showPerPage" (ngModelChange)="getData()">
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="50"> 50
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="100">
+                                100
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="150">
+                                150
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Promotion</th>
+                            <th scope="col">Total Draw</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Total Pending</th>
+                            <th scope="col">Total Success</th>
+                            <th scope="col">Total Claimed</th>
+                            <th scope="col">Total Unclaimed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let statisticList of StatisticList; index as i">
+                            <ng-container *ngIf="statisticList.Status == 1">
+                                <ng-container [ngTemplateOutlet]="statisticsDisplayTemplate"
+                                    [ngTemplateOutletContext]="{ $implicit: statisticList }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+                        <tr *ngFor="let statisticList of StatisticList; index as i">
+                            <ng-container *ngIf="statisticList.Status == 2">
+                                <ng-container [ngTemplateOutlet]="statisticsDisplayTemplate"
+                                    [ngTemplateOutletContext]="{ $implicit: statisticList }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+                        <tr *ngFor="let statisticList of StatisticList; index as i">
+                            <ng-container *ngIf="statisticList.Status == 3">
+                                <ng-container [ngTemplateOutlet]="statisticsDisplayTemplate"
+                                    [ngTemplateOutletContext]="{ $implicit: statisticList }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #statisticsDisplayTemplate let-statisticList>
+                            <td scope="row" [ngStyle]="{'color':statisticList.Status != 3 ? 'black' : 'grey' }">
+                                {{statisticList.Title}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':statisticList.Status != 3 ? 'black' : 'grey' }">
+                                {{statisticList.TotalDraw}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':statisticList.Status != 3 ? 'black' : 'grey' }">
+                                <div [ngSwitch]="statisticList.Status">
+                                    <div *ngSwitchCase="1">Active</div>
+                                    <div *ngSwitchCase="2">Complete</div>
+                                    <div *ngSwitchCase="3">Disable</div>
+                                </div>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':statisticList.Status != 3 ? 'black' : 'grey' }">
+                                {{statisticList.TotalPending}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':statisticList.Status != 3 ? 'black' : 'grey' }">
+                                {{statisticList.TotalSuccess}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':statisticList.Status != 3 ? 'black' : 'grey' }">
+                                <div [ngSwitch]="statisticList.CampaignTypeId">
+                                    <div *ngSwitchCase="1">
+                                        {{statisticList.TotalClaimedRMB}} RMB <br />
+                                        {{statisticList.TotalClaimedUSDT}} USDT
+                                    </div>
+                                    <div *ngSwitchCase="2">
+                                        {{statisticList.TotalClaimedRMB}} RMB <br />
+                                        {{statisticList.TotalClaimedUSDT}} USDT
+                                    </div>
+                                    <div *ngSwitchCase="3">
+                                        N/A
+                                    </div>
+                                </div>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':statisticList.Status != 3 ? 'black' : 'grey' }">
+                                {{statisticList.TotalUnclaimedRMB}} RMB <br />
+                                {{statisticList.TotalUnclaimedUSDT}} USDT
+                            </td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+</div>

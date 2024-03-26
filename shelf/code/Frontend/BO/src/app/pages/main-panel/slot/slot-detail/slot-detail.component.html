@@ -1,0 +1,241 @@
+<div class="pt-3">
+    <a href="/dashboard/" style="font-size: 16px;"><i class="fa fa-arrow-left"></i>  Dashboard</a>
+</div>
+
+<ng-container *ngIf="spinData">
+    <app-breadcrumb [title]="spinData[0].Title" [items]="['Dashboard']"
+        [active_item]="spinData[0].Title">
+    </app-breadcrumb>
+</ng-container>
+
+<new-slot-draw (refreshData)="getDrawList()"></new-slot-draw>
+<edit-slot-draw (refreshData)="getDrawList()"></edit-slot-draw>
+<edit-confirmation (refreshData)="getDrawList()"></edit-confirmation>
+<import-random-result (refreshData)="getRandDrawValidate($event)"></import-random-result>
+<import-random-result-validate (refreshData)="getDrawList()"></import-random-result-validate>
+<draw-summary (refreshData)="getDrawList()"></draw-summary>
+<import-member></import-member>
+<!-- <import-spw (refreshData)="getValidate($event)"></import-spw>
+<import-spw-validate (refreshData)="getDrawList()"></import-spw-validate>
+<import-randdraw (refreshData)="getRandDrawValidate($event)"></import-randdraw>
+<import-spw-randdraw-validate (refreshData)="getDrawList()"></import-spw-randdraw-validate>
+<spw-set-wheel (refreshData)="getDrawList()"></spw-set-wheel>
+<spw-view-wheel (refreshData)="getDrawList()"></spw-view-wheel> -->
+<announcement-modal (refreshData)="getDrawList()"></announcement-modal>
+
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="card" *ngIf="spinData">
+            <div class="row p-3">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label><b>Start Date</b></label>
+                        <div class="form-control" style="background:lightgrey;">
+                            <div class="row">
+                                <div class="col-11">{{spinData[0].StartDate | date:'yyyy/MM/dd' }}
+                                    {{spinData[0].StartDate | date:'HH:mm:ss' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label><b>End Date</b></label>
+                        <div class="form-control" style="background:lightgrey;">
+                            <div class="row">
+                                <div class="col-11">{{spinData[0].EndDate | date:'yyyy/MM/dd' }}
+                                    {{spinData[0].EndDate | date:'HH:mm:ss' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="row p-3">
+                <div class="col-6">
+                    <div class="pagination">
+                        <div class="paging">
+                            <ngb-pagination [collectionSize]="TotalRecord" [pageSize]='showPerPage' [(page)]="page"
+                                (pageChange)="getDrawList()" [maxSize]="5" [rotate]="true" [boundaryLinks]="true">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col">
+                    <div class="items-per-page">
+                        Show:
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                            [(ngModel)]="showPerPage" (ngModelChange)="getDrawList()">
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="50">
+                                50
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="100">
+                                100
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="150">
+                                150
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-between">
+                    <!-- *ngIf="IsAccessible(accesslist.Add_User_Group)" -->
+                    <button class="btn btn-primary" (click)="addDraw()"
+                        *ngIf="spinData && spinData[0].Status != 2 && spinData[0].Status != 3">
+                        New Draw
+                    </button>
+                    <button class="btn btn-danger" [disabled]="!drawSelected.length" (click)="disableDraw()">Disable
+                        Draw</button>
+                    <!-- <a class="btn btn-primary" href="/dashboard/">Back</a> -->
+                </div>
+            </div>
+
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Select</th>
+                            <th scope="col">Draw Date</th>
+                            <th scope="col">Pre Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Pre Start</th>
+                            <th scope="col">Time Start</th>
+                            <th scope="col">Time End</th>
+                            <th scope="col">Configuration</th>
+                            <th scope="col">Member List</th>
+                            <th scope="col">Fake Member List</th>
+                            <th scope="col">Status</th>
+                            <th scope="col" *ngIf="IsAccessible(accesslist.Edit_User_Group)">Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="myTr" *ngFor="let draw of drawList; index as i">
+                            <ng-container *ngIf="draw.Status != 4 && draw.Status != 5">
+                                <ng-container [ngTemplateOutlet]="templatePItem"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+                        <tr class="myTr" *ngFor="let draw of drawList; index as i">
+                            <ng-container *ngIf="draw.Status == 4 ">
+                                <ng-container [ngTemplateOutlet]="templatePItem"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+                        <tr class="myTr" *ngFor="let draw of drawList; index as i">
+                            <ng-container *ngIf="draw.Status == 5">
+                                <ng-container [ngTemplateOutlet]="templatePItem"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templatePItem let-draw>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <input type="checkbox" (change)="onCheckboxChange(draw.DrawId, $event.target.checked)">
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <a href="/dashboard/slot/{{this.campaignId}}/{{draw.DrawId}}/result">
+                                    {{draw.DrawDate | date:'yyyy/MM/dd'}}
+                                </a>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.PreStart | date:'yyyy/MM/dd'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.EndDate | date:'yyyy/MM/dd'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.PreStart | date:'HH:mm:ss'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.StartDate | date:'HH:mm:ss'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.EndDate | date:'HH:mm:ss'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <!-- <span *ngIf="!draw.IsMemberImported || !draw.IsRewardImported">Incomplete</span> -->
+                                <a href="/dashboard/slot/{{this.campaignId}}/{{draw.DrawId}}/config"
+                                    *ngIf="draw.IsMemberImported && draw.IsRewardImported">View</a>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <!-- <span *ngIf="!draw.IsMemberImported || !draw.IsRewardImported">Incomplete</span> -->
+                                <a href="/dashboard/slot/{{this.campaignId}}/{{draw.DrawId}}/member"
+                                    *ngIf="draw.IsMemberImported && draw.IsRewardImported">View</a>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <a href="/dashboard/slot/{{this.campaignId}}/{{draw.DrawId}}/fakemember"
+                                    *ngIf="draw.IsRandDrawImported">View</a>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <div [ngSwitch]="draw.Status">
+                                    <div *ngSwitchCase="1">
+                                        Pending
+                                    </div>
+                                    <div *ngSwitchCase="2">
+                                        <span *ngIf="checkDateRange(draw)">
+                                            Active
+                                        </span>
+                                        <span *ngIf="!checkDateRange(draw)">
+                                            Complete
+                                        </span>
+                                    </div>
+                                    <div *ngSwitchCase="3">Active</div>
+                                    <div *ngSwitchCase="4">Expired</div>
+                                    <div *ngSwitchCase="5">Disabled</div>
+                                </div>
+                            </td>
+                            <td scope="row" class="wrap" *ngIf="IsAccessible(accesslist.Edit_User_Group)">
+                                <button class="btn btn-sm btn-primary mr-2 mb-2" (click)="editSlotCfg(draw.DrawId, draw.PreStart)"
+                                    *ngIf="(draw.Status == 1 || draw.Status == 2)">
+                                    Edit
+                                </button>
+                                <button class="btn btn-sm btn-primary mr-2 mb-2" (click)="Announcement(draw.DrawId,draw.Status)">
+                                    Announcement
+                                </button>
+                                <button class="btn btn-sm btn-primary mr-2 mb-2" (click)="importMember(draw.DrawId)"
+                                    >
+                                    Import 
+                                </button>
+                                <button class="btn btn-sm btn-primary mr-2 mb-2" (click)="viewSummary(draw.DrawId)" 
+                                *ngIf="draw.IsRewardImported" >
+                                    Summary
+                                </button>
+                                <button class="btn btn-sm btn-primary mr-2 mb-2" (click)="importRandomResult(draw.DrawId)"
+                                    *ngIf="(draw.Status == 1 || draw.Status == 2 || draw.Status == 3)">
+                                    Import Fake Member 
+                                </button>
+                                <button class="btn btn-sm btn-danger" (click)="clearImportRandomResult(draw.DrawId)"
+                                    *ngIf="draw.IsRandDrawImported && (draw.Status == 1 || draw.Status == 2 || draw.Status == 3)">
+                                    Clear Fake Member 
+                                </button>                     
+                                <!-- <button class="btn btn-sm btn-danger" (click)="clearImport(draw.DrawId)"
+                                    *ngIf="draw.IsMemberImported && (draw.Status == 1 || draw.Status == 2)">
+                                    Clear Import 
+                                </button> -->
+                                <!-- <button class="btn btn-sm btn-primary"
+                                    (click)="getRewardWinners(draw.DrawId, draw.RewardBatchID)"
+                                    *ngIf="draw.TotalSuccess">
+                                    Export Winners
+                                </button> -->
+                            </td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+</div>

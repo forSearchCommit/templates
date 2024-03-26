@@ -1,0 +1,12 @@
+<div class="form-inline">
+  <div class="form-group">
+    Page: 
+    <select class="form-control" id="paginationSelect" [ngModel]="currentPage" (ngModelChange)="selectNewPage($event)">
+      <option value="{{i+1}}" *ngFor="let in  of counter(totalPage) ; index as i" [selected]="i+1 === page">
+        {{
+          i+1
+        }}
+      </option>
+    </select>
+  </div>
+</div>

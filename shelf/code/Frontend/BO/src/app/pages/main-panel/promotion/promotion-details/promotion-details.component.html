@@ -1,0 +1,205 @@
+<ng-container *ngIf="CurrentPromotionData">
+    <app-breadcrumb [title]="CurrentPromotionData[0].Title" [items]="['Dashboard']"
+        [active_item]="CurrentPromotionData[0].Title">
+    </app-breadcrumb>
+</ng-container>
+
+<add-draw-modal (refreshData)="getData()"></add-draw-modal>
+<import-eligible-modal (refreshData)="getData()"></import-eligible-modal>
+<import-rewards-modal (refreshData)="getData()"></import-rewards-modal>
+<announcement-modal (refreshData)="getData()"></announcement-modal>
+
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="card" *ngIf="CurrentPromotionData">
+            <div class="row p-3">
+                <div class="col">
+                    <span>
+                        Start Date: {{CurrentPromotionData[0].StartDate | date:'yyyy/MM/dd' }}
+                        {{CurrentPromotionData[0].StartDate | date:'HH:mm:ss' }}
+                    </span>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col">
+                    <span>
+                        End Date: {{CurrentPromotionData[0].EndDate | date:'yyyy/MM/dd' }}
+                        {{CurrentPromotionData[0].EndDate | date:'HH:mm:ss' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="row p-3">
+                <div class="col-6">
+                    <div class="pagination">
+                        <div class="paging">
+                            <ngb-pagination [collectionSize]="TotalRecord" [pageSize]='showPerPage' [(page)]="page"
+                                (pageChange)="getData()" [maxSize]="5" [rotate]="true" [boundaryLinks]="true">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col">
+                    <div class="items-per-page">
+                        Show:
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                            [(ngModel)]="showPerPage" (ngModelChange)="getData()">
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="50">
+                                50
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="100">
+                                100
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="150">
+                                150
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-between">
+                    <!-- *ngIf="IsAccessible(accesslist.Add_User_Group)" -->
+                    <button class="btn btn-primary" (click)="AddDraw()"
+                        *ngIf="CurrentPromotionData && CurrentPromotionData[0].Status != 2 && CurrentPromotionData[0].Status != 3">
+                        Add New Draw
+                    </button>
+                    <button class="btn btn-danger" [disabled]="!DrawSelected.length" (click)="DisableDraw()">Disable
+                        Draw</button>
+                    <a class="btn btn-primary" href="/dashboard/">Back</a>
+                </div>
+            </div>
+
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Select</th>
+                            <th scope="col">Draw Date</th>
+                            <th scope="col">Pre Start</th>
+                            <th scope="col">Time Start</th>
+                            <th scope="col">Time End</th>
+                            <th scope="col">Max Amount (RMB)</th>
+                            <th scope="col">Max Amount (USDT)</th>
+                            <th scope="col">Eligible Member Import</th>
+                            <th scope="col">Rewards Table Import</th>
+                            <th scope="col">Rewards Limit</th>
+                            <th scope="col">Status</th>
+                            <th scope="col" *ngIf="IsAccessible(accesslist.Edit_User_Group)">Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let draw of DrawList; index as i">
+                            <ng-container *ngIf="draw.Status != 4 && draw.Status != 5">
+                                <ng-container [ngTemplateOutlet]="templatePItem"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+                        <tr *ngFor="let draw of DrawList; index as i">
+                            <ng-container *ngIf="draw.Status == 4 ">
+                                <ng-container [ngTemplateOutlet]="templatePItem"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+                        <tr *ngFor="let draw of DrawList; index as i">
+                            <ng-container *ngIf="draw.Status == 5">
+                                <ng-container [ngTemplateOutlet]="templatePItem"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templatePItem let-draw>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <input type="checkbox" (change)="onCheckboxChange(draw.DrawId, $event.target.checked)">
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <a href="/dashboard/promotion/{{this.CurrentPromotionId}}/{{draw.DrawId}}/promo"
+                                    *ngIf="draw.Status === 2 || draw.Status === 3 || draw.Status === 4">
+                                    {{draw.DrawDate | date:'yyyy/MM/dd'}}
+                                </a>
+                                <span
+                                    *ngIf="draw.Status === 1 && draw.Status !== 2 && draw.Status !== 3 && draw.Status !== 4">
+                                    {{draw.DrawDate | date:'yyyy/MM/dd'}}
+                                </span>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.PreStart | date:'HH:mm:ss'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.StartDate | date:'HH:mm:ss'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.EndDate | date:'HH:mm:ss'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.RMBMaxAmount | number: '1.0-0'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.USDTMaxAmount | number: '1.0-0'}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <span *ngIf="!draw.IsMemberImported">Incomplete</span>
+                                <a href="/dashboard/promotion/{{this.CurrentPromotionId}}/{{draw.DrawId}}/member"
+                                    *ngIf="draw.IsMemberImported">Complete</a>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <span *ngIf="!draw.IsRewardImported">Incomplete</span>
+                                <a href="/dashboard/promotion/{{this.CurrentPromotionId}}/{{draw.DrawId}}/reward"
+                                    *ngIf="draw.IsRewardImported">Complete</a>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                {{draw.RewardLimit}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 5 ? 'black' : 'grey' }">
+                                <div [ngSwitch]="draw.Status">
+                                    <div *ngSwitchCase="1">
+                                        Pending
+                                    </div>
+                                    <div *ngSwitchCase="2">
+                                        <span *ngIf="checkDateRange(draw)">
+                                            Active
+                                        </span>
+                                        <span *ngIf="!checkDateRange(draw)">
+                                            Complete
+                                        </span>
+                                    </div>
+                                    <div *ngSwitchCase="3">Active</div>
+                                    <div *ngSwitchCase="4">Expired</div>
+                                    <div *ngSwitchCase="5">Disabled</div>
+                                </div>
+                            </td>
+                            <td scope="row" class="no-wrap" *ngIf="IsAccessible(accesslist.Edit_User_Group)">
+                                <button class="btn btn-sm btn-primary" (click)="Announcement(draw.DrawId,draw.Status)">
+                                    Announcement
+                                </button>
+                                <button class="btn btn-sm btn-primary" (click)="ImportEligible(draw.DrawId)"
+                                    *ngIf="!draw.IsMemberImported && draw.Status != 5">
+                                    Import Eligible
+                                </button>
+                                <button class="btn btn-sm btn-primary" (click)="ImportRewards(draw.DrawId)"
+                                    *ngIf="!draw.IsRewardImported && draw.Status != 5">Import
+                                    Rewards</button>
+                                <button class="btn btn-sm btn-primary"
+                                    (click)="getRewardWinners(draw.DrawId, draw.RewardBatchID)"
+                                    *ngIf="draw.TotalSuccess">
+                                    Export Winners
+                                </button>
+                            </td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+</div>

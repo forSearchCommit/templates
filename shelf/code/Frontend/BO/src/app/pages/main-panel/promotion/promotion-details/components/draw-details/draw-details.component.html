@@ -1,0 +1,157 @@
+<!-- <app-breadcrumb [title]="'Draw Details'" [items]="" [active_item]="'Promotion Dashboard'"></app-breadcrumb> -->
+<ng-container *ngIf="CurrentDrawData && CurrentPromotionData">
+    <app-breadcrumb [title]="CurrentPromotionData[0].Title" [items]="['Dashboard', CurrentPromotionData[0].Title]"
+        [active_item]="CurrentDrawData[0].TransactionId">
+    </app-breadcrumb>
+</ng-container>
+
+<!-- <add-draw-modal (refreshData)="getData()"></add-draw-modal>
+<import-eligible-modal (refreshData)="getData()"></import-eligible-modal>
+<import-rewards-modal (refreshData)="getData()"></import-rewards-modal> -->
+
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="card" *ngIf="CurrentDrawData">
+            <div class="row p-3">
+                <div class="col">
+                    <span>
+                        Start Date: {{CurrentDrawData[0].StartDate | date:'yyyy/MM/dd' }}
+                        {{CurrentDrawData[0].StartDate | date:'HH:mm:ss' }}
+                    </span>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col">
+                    <span>
+                        End Date: {{CurrentDrawData[0].EndDate | date:'yyyy/MM/dd' }}
+                        {{CurrentDrawData[0].EndDate | date:'HH:mm:ss' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="row p-3">
+                <div class="col">
+                    <div class="pagination">
+                        <div class="paging">
+                            <ngb-pagination [collectionSize]="TotalRecord" [pageSize]='showPerPage' [(page)]="page"
+                                (pageChange)="getDrawDetailsData()" [maxSize]="5" [rotate]="true"
+                                [boundaryLinks]="true">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col">
+                    <div class="items-per-page">
+                        Show:
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                            [(ngModel)]="showPerPage" (ngModelChange)="getDrawDetailsData()">
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="50">
+                                50
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="100">
+                                100
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="150">
+                                150
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-between">
+                    <ng-container *ngIf="CurrentDrawData && CurrentDrawData[0].Status != 3">
+                        <button class="btn btn-primary" *ngIf="CurrentType === 'member' || CurrentType === 'reward'"
+                            (click)="clearPromotionDraw()">Clear</button>
+                    </ng-container>
+                    <button class="btn btn-primary" (click)="getRewardWinners()">Export List</button>
+                    <a class="btn btn-primary" href="/dashboard/promotion/{{CurrentPromotionId}}">Back</a>
+                </div>
+            </div>
+
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col" *ngIf="CurrentType === 'member'">ID</th> -->
+                            <th scope="col" *ngIf="CurrentType === 'promo'">HongBao ID</th>
+                            <th scope="col" *ngIf="CurrentType === 'member' || CurrentType === 'promo'">Member ID</th>
+                            <th scope="col" *ngIf="CurrentType === 'member' || CurrentType === 'promo'">Currency</th>
+                            <th scope="col" *ngIf="CurrentType === 'reward'">RMB</th>
+                            <th scope="col" *ngIf="CurrentType === 'reward'">USDT</th>
+                            <th scope="col" *ngIf="CurrentType === 'reward' || CurrentType === 'promo'">Churn</th>
+                            <th scope="col" *ngIf="CurrentType === 'reward'">Deduction Factor</th>
+                            <th scope="col" *ngIf="CurrentType === 'reward'">Random Pick</th>
+                            <th scope="col" *ngIf="CurrentType === 'promo'">Status</th>
+                            <th scope="col" *ngIf="CurrentType === 'promo'">Claim Amount</th>
+                            <th scope="col" *ngIf="CurrentType === 'promo'">Transaction Success Date/Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let draw of DrawList; index as i">
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'promo'">
+                                {{draw.RewardId}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'member' || CurrentType === 'promo'">
+                                {{draw.MemberId}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'member' || CurrentType === 'promo'">
+                                {{draw.Currency}}
+                            </td>
+                            <!--  -->
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'reward'">
+                                {{draw.RMBAmount}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'reward'">
+                                {{draw.USDTAmount}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'reward' || CurrentType === 'promo'">
+                                {{draw.Churn}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'promo'">
+                                <div [ngSwitch]="draw.Status">
+                                    <div *ngSwitchDefault></div>
+                                    <div *ngSwitchCase="1">Claimed</div>
+                                </div>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'promo'">
+                                <div *ngIf="!draw.ClaimedAmount">Pending</div>
+                                <div *ngIf="draw.ClaimedAmount">{{draw.ClaimedAmount}}</div>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'promo'">
+                                <div *ngIf="!draw.ClaimedAmount">Pending</div>
+                                <div *ngIf="draw.ClaimedAmount">
+                                    {{draw.ClaimDate | date:'yyyy/MM/dd '}}
+                                    {{draw.ClaimDate | date:'HH:mm:ss'}}</div>
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'reward'">
+                                {{draw.DeductionFactor}}
+                            </td>
+                            <td scope="row" [ngStyle]="{'color':draw.Status != 3 ? 'black' : 'grey' }"
+                                *ngIf="CurrentType === 'reward'">
+                                {{draw.RandomPick ? 'Y' : 'N'}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+</div>

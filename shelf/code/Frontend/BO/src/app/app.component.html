@@ -1,0 +1,20 @@
+<ngx-loading-bar [color]="'#7366ff'" [includeSpinner]="false" [height]="'4px'"></ngx-loading-bar>
+<app-loader></app-loader>
+<app-tap-to-top></app-tap-to-top>
+
+<!-- <div class="page-wrapper compact-wrapper" id="pageWrapper" *ngIf="authenticationService.isAuthenticated">
+    <app-header></app-header>
+    <div class="page-body-wrapper horizontal-menu">
+        <app-sidebar></app-sidebar>
+        <div class="page-body">
+            aaa
+        </div>
+    </div>
+</div> -->
+
+<!-- <div *ngIf="authenticationService.isAuthenticated" >
+    <button routerLink="/home">home</button>
+    <button routerLink="/admin_control">admin control</button>
+    <button (click)="logout()">logout</button>
+</div> -->
+<router-outlet></router-outlet>

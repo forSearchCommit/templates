@@ -1,0 +1,138 @@
+<div class="pt-3">
+    <a href="/dashboard/spinwheel/{{this.campaignId}}" style="font-size: 16px;"><i class="fa fa-arrow-left"></i>  Draw List</a>
+</div>
+
+<app-breadcrumb [title]="'Wheel Setting'" [items]="['Dashboard']"  [active_item]="'Spinwheel'"></app-breadcrumb>
+
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="card">
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <!-- <th scope="col">Code</th>
+                            <th scope="col">Name</th> -->
+                            <th scope="col">Display Name</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Prize Category</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Remain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let draw of wheelList; index as i">
+                            <ng-container>
+                                <ng-container [ngTemplateOutlet]="templatePItem"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templatePItem let-draw>
+                            <td scope="row">
+                               {{this.getWheelIdx(draw)}}
+                            </td>
+                            <!-- <td scope="row">
+                                {{draw.Code}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Name}}
+                             </td> -->
+                             <td scope="row">
+                                {{draw.DisplayName}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Position}}
+                             </td>
+                             <td scope="row">
+                                {{draw.PrizeGroup}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Total}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Remain}}
+                             </td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="page-title">
+            <h4>Prize List</h4> 
+        </div>
+        <div class="card">
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Display Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Rank</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Remain</th>
+                            <th scope="col">USDTAmt</th>
+                            <th scope="col">RMBAmt</th>
+                            <th scope="col">Churn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let draw of prizeList; index as i">
+                            <ng-container>
+                                <ng-container [ngTemplateOutlet]="templatePrize"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templatePrize let-draw>
+                            <td scope="row">
+                               {{this.getPrizeIdx(draw)}}
+                            </td>
+                            <td scope="row">
+                                {{draw.Code}}
+                             </td>
+                             <td scope="row">
+                                {{draw.DisplayName}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Descr}}
+                             </td>
+                             <td scope="row">
+                                {{draw.PrizeGrp}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Rank}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Total}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Remain}}
+                             </td>
+                             <td scope="row">
+                                {{draw.USDTAmt}}
+                             </td>
+                             <td scope="row">
+                                {{draw.RMBAmt}}
+                             </td>
+                             <td scope="row">
+                                {{draw.ChurnMultp}}
+                             </td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+
+</div>

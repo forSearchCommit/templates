@@ -1,0 +1,63 @@
+<ng-template #editUserModalContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit User</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form #editUserAction="ngForm" (ngSubmit)="processEditUser(editUserAction)" class="needs-validation" novalidate
+        [ngClass]="{'was-validated': formValidated}">
+        <div class="modal-body">
+            <div class="loader-box" *ngIf="!loaded; else loadedBlock">
+                <div class="loader-3"></div>
+            </div>
+            <ng-template #loadedBlock>
+                <div class="">
+                    <div class="mb-3 row align-items-center">
+                        <label class="col-3 col-form-label" for="userId">User ID</label>
+                        <div class="col-9 text-userid">
+                            {{selectedUserId}}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label" for="name">Name</label>
+                        <div class="col-9">
+                            <input class="form-control" name="name" type="text" autocomplete="new-password" required
+                                [(ngModel)]="userDetails.Name">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label" for="email">Email</label>
+                        <div class="col-9">
+                            <input class="form-control" name="email" type="text" autocomplete="new-password" required
+                                [(ngModel)]="userDetails.Email">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label" for="roletype">Role Type</label>
+                        <div class="col-9">
+                            <select class="form-control" name="roletype" required [(ngModel)]="userDetails.RoleType">
+                                <ng-container *ngFor="let role of RoleList, index as i">
+                                    <option value="{{role.Value}}">{{role.Text}}</option>
+                                </ng-container>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label" for="status">Status</label>
+                        <div class="col-9">
+                            <select class="form-control" name="status" required [(ngModel)]="userDetails.Status">
+                                <option value="1">Active</option>
+                                <option value="0">Disabled</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" type="submit">Save Changes</button>
+            <button class="btn btn-light" type="button" (click)="modal.close('Close click')">Cancel</button>
+        </div>
+    </form>
+</ng-template>

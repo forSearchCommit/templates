@@ -1,0 +1,72 @@
+<app-breadcrumb [title]="'User Management'" [items]="['Admin Control']" [active_item]="'User Management'"></app-breadcrumb>
+<div class="container-fluid">
+
+    <editUser-modal (refreshData)="refreshCurrentUserListTable($event)"></editUser-modal>
+    <app-reset-password></app-reset-password>
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+
+    <ng-container *ngIf="loaded">
+        <div *ngIf="userLists.length !== 0" class="col-12">
+            <div class="card">
+                <div class="row p-3" *ngIf="IsAccessible(accesslist.Add_User)">
+                    <div class="col-12"><button class="btn btn-primary" routerLink = "/dashboard/add-user">Add New User</button></div>
+                </div>
+                <div class="table-responsive text-center">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">User Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role Type</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Last Login</th>
+                                <th scope="col">Created By</th>
+                                <th scope="col">Created Date</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let userlist of userLists; index as i">
+                                <td scope="row">{{i+1}}</td>
+                                <td scope="row">{{userlist.UserId}}</td>
+                                <td scope="row">{{userlist.Name}}</td>
+                                <td scope="row">{{userlist.Email}}</td>
+                                <td scope="row">
+                                    <span>{{RoleDic&& RoleDic[userlist.RoleType]?RoleDic[userlist.RoleType]:""}}</span>
+                                </td>
+                                <td scope="row">
+                                    <span class="badge badge-danger" *ngIf="userlist.Status == '0'">Disabled</span>
+                                    <span class="badge badge-success" *ngIf="userlist.Status == '1'">Active</span>
+                                    <span class="badge badge-grey" *ngIf="userlist.Status == '2'">Deleted</span>
+                                </td>
+                                <td scope="row">
+                                    {{userlist.LastLogin | date:'yyyy/MM/dd'}}
+                                    <br/>
+                                    {{userlist.LastLogin | date:'HH:mm:ss'}}
+                                </td>
+                                <td scope="row">{{userlist.CreatedBy}}</td>
+                                <td scope="row">
+                                    {{userlist.CreatedDate | date:'yyyy/MM/dd'}}
+                                    <br/>
+                                    {{userlist.CreatedDate | date:'HH:mm:ss'}}
+                                </td>
+                                <td scope="row" class="no-wrap">
+                                    <a class="btn btn-sm btn-info" target="_blank" href="/dashboard/user-log/{{userlist.UserId}}" *ngIf="IsAccessible(accesslist.View_User_Log)">Log</a>
+                                    <button class="btn btn-sm btn-disabled" *ngIf="IsAccessible(accesslist.Edit_User) && userlist.Status == '2'" >Edit</button>
+                                    <button class="btn btn-sm btn-disabled" *ngIf="IsAccessible(accesslist.Delete_User) && userlist.Status == '2'" >Delete</button>
+                                    <button class="btn btn-sm btn-primary" *ngIf="IsAccessible(accesslist.Edit_User) && (userlist.Status == '0' || userlist.Status == '1')" (click)="openEditUserModal(userlist.UserId)" >Edit</button>
+                                    <button class="btn btn-sm btn-danger" *ngIf="IsAccessible(accesslist.Delete_User) && (userlist.Status == '0' || userlist.Status == '1')" (click)="deleteUser(userlist.UserId)">Delete</button>
+                                    <button class="btn btn-sm btn-primary" (click)="resetPassword(userlist.UserId)" *ngIf="IsAccessible(accesslist.Reset_User_Password)">Reset</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

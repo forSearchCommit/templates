@@ -1,0 +1,41 @@
+<div class="container-fluid p-0">
+  <div class="row m-0">
+    <div class="col-12 p-0">
+      <div class="login-card">
+        <div>
+          <div>
+            <a class="logo" routerLink="/home">
+              <!-- <img class="img-fluid for-light" src="../assets/images/logo/login.png" alt="looginpage">
+                    <img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt="looginpage"> -->
+              <h2>Campaign BO</h2>
+            </a>
+          </div>
+          <div class="login-main">
+            <form class="theme-form" (ngSubmit)="onSubmit(signInForm)" #signInForm="ngForm">
+              <!-- <form class="theme-form" (ngSubmit)="onSubmit(userId.value,password.value)" #signInForm="ngForm"> -->
+              <h4>Sign in to account</h4>
+              <p>This site is IP restricted. You may not have access.</p>
+              <div class="form-group">
+                <label class="col-form-label">User ID</label>
+                <input class="form-control" type="userid" name="userId" required ngModel>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Password</label>
+                <input class="form-control" type="password" name="password" required ngModel>
+                <!-- <div class="show-hide"><span class="show"></span></div> -->
+              </div>
+              <div class="form-group">
+                <div class="mb-4"><button class="btn link" type="button" (click)="ForgetPassword()">Forgot
+                    password?</button></div>
+                <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+              </div>
+              <div class="alert alert-danger mb-0" role="alert" *ngIf="isFormValid">
+                Please fill all fields.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

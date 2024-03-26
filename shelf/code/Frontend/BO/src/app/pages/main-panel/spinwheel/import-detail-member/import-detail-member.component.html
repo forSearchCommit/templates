@@ -1,0 +1,152 @@
+<div class="pt-3">
+    <a href="/dashboard/spinwheel/{{this.campaignId}}" style="font-size: 16px;"><i class="fa fa-arrow-left"></i>  Draw List</a>
+</div>
+
+<app-breadcrumb [title]="'Member List'" [items]="['Dashboard']"  [active_item]="'Spinwheel'"></app-breadcrumb>
+
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="card">
+            <div class="row p-3">
+                <div class="col-8">
+                    <div class="pagination">
+                        <div class="paging">
+                            <ngb-pagination [collectionSize]="totalRecord" [pageSize]='showPerPage' [(page)]="page"
+                                (pageChange)="getData()" [maxSize]="5" [rotate]="true" [boundaryLinks]="true">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-9">
+                    <div class="items-per-page">
+                        Show:
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                            [(ngModel)]="showPerPage" (ngModelChange)="getData()">
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="50">
+                                50
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="100">
+                                100
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="150">
+                                150
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div style="float: right;">
+                        <button class="btn btn-sm btn-dark" (click)="exportAll()">
+                            Export All
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Member Code</th>
+                            <th scope="col">Currency</th>
+
+                            <th scope="col" *ngFor="let _ of MaxRoundHeader; let i = index">
+                                Spin {{i + 1}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let draw of drawList; index as i">
+                            <ng-container>
+                                <ng-container [ngTemplateOutlet]="templateMbr"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templateMbr let-draw>
+                            <td scope="row">
+                               {{this.getDrawIdx(draw)}}
+                            </td>
+                            <td scope="row">
+                                {{draw.MbrCode}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Currency}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Spin1}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Spin2}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Spin3}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Spin4}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Spin5}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Spin6}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Spin7}}
+                             </td>
+                             <td scope="row">
+                                {{draw.Spin8}}
+                             </td>
+                             <td *ngIf="MaxRound > 8" scope="row" >
+                                {{draw.Spin9}}
+                             </td>
+                             <td *ngIf="MaxRound > 9" scope="row" >
+                                {{draw.Spin10}}
+                             </td>
+                             <td *ngIf="MaxRound > 10" scope="row" >
+                                {{draw.Spin11}}
+                             </td>
+                             <td *ngIf="MaxRound > 11" scope="row" >
+                                {{draw.Spin12}}
+                             </td>
+                             <td *ngIf="MaxRound > 12" scope="row" >
+                                {{draw.Spin13}}
+                             </td>
+                             <td *ngIf="MaxRound > 13" scope="row" >
+                                {{draw.Spin14}}
+                             </td>
+                             <td *ngIf="MaxRound > 14" scope="row" >
+                                {{draw.Spin15}}
+                             </td>
+                             <td *ngIf="MaxRound > 15" scope="row" >
+                                {{draw.Spin16}}
+                             </td>
+                             <td *ngIf="MaxRound > 16" scope="row" >
+                                {{draw.Spin17}}
+                             </td>
+                             <td *ngIf="MaxRound > 17" scope="row" >
+                                {{draw.Spin18}}
+                             </td>
+                             <td *ngIf="MaxRound > 18" scope="row" >
+                                {{draw.Spin19}}
+                             </td>
+                             <td *ngIf="MaxRound > 19" scope="row" >
+                                {{draw.Spin20}}
+                             </td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+
+</div>

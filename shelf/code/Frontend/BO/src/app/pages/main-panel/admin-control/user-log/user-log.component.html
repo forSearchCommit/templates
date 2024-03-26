@@ -1,0 +1,101 @@
+<app-breadcrumb [title]="'User Log'" [items]="['Admin Control', 'User Management']" [active_item]="'User Log'">
+</app-breadcrumb>
+
+<div class="container-fluid">
+
+    <ng-container *ngIf="!loaded">
+        <!-- <div class="loader-3"></div> -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">User ID doesn't exist</div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="loaded">
+        <div class="col-12" *ngIf="userDetails.length !== 0">
+            <div class="card">
+                <div class="card-body" *ngFor="let selectedUser of userDetails;">
+                    <div class="row UserDetail">
+                        <div class="col-3">
+                            <div class="title">User ID</div>
+                            <div class="detail">{{selectedUser.UserId}}</div>
+                        </div>
+                        <div class="col-3">
+                            <div class="title">User Name</div>
+                            <div class="detail">{{selectedUser.Name}}</div>
+                        </div>
+                        <div class="col-3">
+                            <div class="title">Role Type</div>
+                            <div class="detail">
+                                <span>{{RoleDic&& RoleDic[selectedUser.RoleType]?RoleDic[selectedUser.RoleType]:""}}</span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="title">Status</div>
+                            <div class="detail">
+                                <span class="badge badge-danger" *ngIf="selectedUser.Status == '0'">Disabled</span>
+                                <span class="badge badge-success" *ngIf="selectedUser.Status == '1'">Active</span>
+                                <span class="badge badge-grey" *ngIf="selectedUser.Status == '2'">Deleted</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row UserDetail">
+                        <div class="col-3">
+                            <div class="title">Email</div>
+                            <div class="detail">{{selectedUser.Email}}</div>
+                        </div>
+                        <div class="col-3">
+                            <div class="title">Created Date</div>
+                            <div class="detail">{{selectedUser.CreatedDate | date:'yyyy/MM/dd , HH:mm:ss'}}
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="title">Created By</div>
+                            <div class="detail">{{selectedUser.CreatedBy}}</div>
+                        </div>
+                        <div class="col-3">
+                            <div class="title">Last Login</div>
+                            <div class="detail">{{selectedUser.LastLogin | date:'yyyy/MM/dd , HH:mm:ss'}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive text-center">
+                        <table class="table table-bordered">
+                            <thead class="thead-bg">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">User ID</th>
+                                    <th scope="col">Details</th>
+                                    <th scope="col">Remark</th>
+                                    <th scope="col">Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataExist">
+                                <tr *ngFor="let logDetail of LogList; index as i">
+                                    <td scope="row">{{i+1}}</td>
+                                    <td scope="row">{{logDetail.Action}}</td>
+                                    <td scope="row">{{logDetail.UserId}}</td>
+                                    <td scope="row">{{logDetail.Details}}</td>
+                                    <td scope="row">{{logDetail.Remark}}</td>
+                                    <td scope="row">
+                                        {{logDetail.CreatedDate | date:'yyyy/MM/dd'}}
+                                        <br />
+                                        {{logDetail.CreatedDate | date: 'HH:mm:ss'}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="!dataExist">
+                                <td colspan="6">No Record</td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

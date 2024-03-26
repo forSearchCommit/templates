@@ -1,0 +1,178 @@
+<div class="pt-3">
+    <a href="/dashboard/slot/{{this.campaignId}}" style="font-size: 16px;"><i class="fa fa-arrow-left"></i> Draw
+        List</a>
+</div>
+
+<app-breadcrumb [title]="'Result'" [items]="['Dashboard']" [active_item]="'Niu 8 Slots'"></app-breadcrumb>
+
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="card">
+            <div class="row p-3">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="MbrCode"><b>Member Code</b></label>
+                        <input class="form-control" autocomplete="off" placeholder="Member Code" name="MbrCode"
+                            [(ngModel)]="txtMbrCode">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="Currency"><b>Currency</b></label>
+                        <!-- <input class="form-control" autocomplete="off" placeholder="RMB" name="Currency"
+                            [(ngModel)]="txtCurrency"> -->
+                        <select class="form-control" name="Currency" [(ngModel)]="txtCurrency">
+                            <option value="">Select</option>
+                            <option value="RMB">RMB</option>
+                            <option value="USDT">USDT</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="Prize">Prize Name</label>
+                        <select class="form-control" name="Prize" [(ngModel)]="txtPrizeId">
+                            <option value="">Select</option>
+                            <option value="{{itm.Id}}" *ngFor="let itm of prizeList">{{itm.Code}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="Status">VIP Level</label>
+                        <select class="form-control" name="vipLvl" [(ngModel)]="txtVipLvlId">
+                            <option value="">Select</option>
+                            <option value="1">VIP 1</option>
+                            <option value="2">VIP 2</option>
+                            <option value="3">VIP 3</option>
+                            <option value="4">VIP 4</option>
+                            <option value="5">VIP 5</option>
+                            <option value="6">VIP 6</option>
+                            <option value="7">VIP 7</option>
+                            <option value="8">VIP 8</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3">                
+                    <button style="float: right;" class="btn btn-primary" type="button" (click)="btnSearch()">Search</button>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-8">
+                    <div class="pagination">
+                        <div class="paging">
+                            <ngb-pagination [collectionSize]="totalRecord" [pageSize]='showPerPage' [(page)]="page"
+                                (pageChange)="getData()" [maxSize]="5" [rotate]="true" [boundaryLinks]="true">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-9">
+                    <div class="items-per-page">
+                        Show:
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                            [(ngModel)]="showPerPage" (ngModelChange)="getData()">
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="50">
+                                50
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="100">
+                                100
+                            </label>
+                            <label class="btn-primary" ngbButtonLabel>
+                                <input type="radio" ngbButton [value]="150">
+                                150
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div style="float: right;">
+                        <button class="btn btn-sm btn-primary mr-3"(click)="export()" *ngIf="resultList.length > 0">
+                            Export This
+                        </button>
+                        <button class="btn btn-sm btn-dark" (click)="exportAll()">
+                            Export All
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Member Code</th>
+                            <th scope="col">VIP Level</th>
+                            <th scope="col">Currency</th>
+                            <th scope="col">Prize Name</th>
+                            <th scope="col">Prize Rank</th>
+                            <th scope="col">Spin No</th>
+                            <th scope="col">Spin Result</th>
+                            <th scope="col">Amt</th>
+                            <th scope="col">Churn</th>
+                            <th scope="col">Spun Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itm of resultList; index as i">
+                            <ng-container>
+                                <ng-container [ngTemplateOutlet]="templateResult"
+                                    [ngTemplateOutletContext]="{ $implicit: itm }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templateResult let-itm>
+                            <td scope="row">
+                                {{itm.Id}}
+                            </td>
+                            <td scope="row">
+                                {{itm.MbrCode}}
+                            </td>
+                            <td scope="row">
+                                {{itm.VipLvl}}
+                            </td>
+                            <td scope="row">
+                                {{itm.Currency}}
+                            </td>
+                            <td scope="row">
+                                {{itm.PrizeName}}
+                            </td>
+                            <td scope="row">
+                                {{itm.PrizeRank}}
+                            </td>
+                            <td scope="row">
+                                {{itm.RoundNo}}
+                            </td>
+                            <td scope="row">
+                                {{itm.PrizeCode}}
+                            </td>
+                            <td scope="row">
+                                {{itm.Amount}}
+                            </td>
+                            <td scope="row">
+                                {{itm.ChurnMultp}}
+                            </td>
+                            <td scope="row">
+                                {{itm.ClaimedDate | date:'yyyy/MM/dd HH:mm:ss'}}
+                            </td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+</div>

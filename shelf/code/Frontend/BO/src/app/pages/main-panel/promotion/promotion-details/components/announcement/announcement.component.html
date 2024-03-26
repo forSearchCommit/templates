@@ -1,0 +1,158 @@
+<ng-template #AnnouncementModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            Notification Announcement
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form class="form needs-validation" autocomplete="off" #addAnnouncement="ngForm" novalidate
+        [ngClass]="{'was-validated': formValidated}">
+        <div class="modal-body">
+            <div *ngIf="status=='1' || status=='2' || status=='3'">
+                <div class="row">
+                    <label class="col label-width col-form-label">Title<span style="color: red;">*</span></label>
+                    <div class="col-4 pl-0 input-group">
+                        <input class="form-control" [(ngModel)]="Title" name="Title" type="text" autocomplete="off"
+                            required ngModel (focus)="onFocus()">
+                        <button (click)="toggleEmojiPicker()"> 😀</button><br>
+                        <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker"
+                            (emojiSelect)="addEmoji($event)" title="Pick your emoji"></emoji-mart>
+                    </div>
+                </div>
+                <div class="text-danger" *ngIf="noTitle" style="margin-left: 9rem; margin-top: 0.3rem;">
+                    <i class="fa fa-exclamation-circle mr-1"></i>Please enter Title
+                </div>
+                <div class="mt-3 row">
+                    <label class="col label-width col-form-label">Sub Content<span style="color: red;">*</span></label>
+                    <div class="col-4 pl-0 input-group">
+                        <input class="form-control" [(ngModel)]="SubContent" name="SubContent" type="text"
+                            autocomplete="off" required ngModel (focus)="onFocus2()">
+                        <button (click)="toggleEmojiPicker2()"> 😀</button><br>
+                        <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker2"
+                            (emojiSelect)="addEmoji2($event)" title="Pick your emoji"></emoji-mart>
+                    </div>
+                </div>
+                <div class="text-danger" *ngIf="noSubContent" style="margin-left: 9rem; margin-top: 0.3rem;">
+                    <i class="fa fa-exclamation-circle mr-1"></i>Please enter SubContent
+                </div>
+                <div class="mt-3 row">
+                    <label class="col label-width col-form-label">Big Picture:</label>
+                    <div class="col input-width">
+                        <div class="row w-80">
+                            <div class="col-sm-6 p-0 m-0">
+                                <div class="custom-datepicker custom-datepicker-dropdown">
+                                    <div class="form-group mb-0">
+                                        <div class="input-group">
+                                            <div class="input-upload-group">
+                                                <input class="form-control input-upload" type="file" name="import_file" id="import_file"
+                                                    accept="image/png, image/gif, image/jpeg, image/jpg"
+                                                    (change)="onFileChange($event)" #inputFile />
+                                                <span class="btn-browse">Browse</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span style="color: red;">Up to 300KB</span>
+                        </div>
+                        <div class="text-danger" *ngIf="noFile" style="margin-top: 0.3rem; margin-left: -0.5rem;">
+                            <i class="fa fa-exclamation-circle mr-1"></i>Please upload file in correct format and not
+                            exceeds 300KB
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 row">
+                    <label class="col label-width col-form-label">Push Date<span style="color: red;">*</span></label>
+                    <div class="col reduced-width">
+                        <div class="row w-80">
+                            <div class="col-sm-6 p-0 m-0">
+                                <div class="custom-datepicker custom-datepicker-dropdown">
+                                    <div class="form-group mb-0">
+                                        <div class="input-group">
+                                            <input class="form-control" autocomplete="off" placeholder="Push Date"
+                                                name="PushDate" readonly [(ngModel)]="PushDate" ngbDatepicker
+                                                #f="ngbDatepicker">
+                                            <div class="input-group-append">
+                                                <button class="btn calendar" (click)="f.toggle()" type="button"
+                                                    style="padding: 0.275rem 1.75rem; background-color:white;">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 pl-1 float-right">
+                                <ngb-timepicker [(ngModel)]="PushTime" name="PushTime" [seconds]="seconds">
+                                </ngb-timepicker>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="noPushDateTime"
+                            style="margin-top: 0.3rem; margin-left: -0.5rem;">
+                            <i class="fa fa-exclamation-circle mr-1"></i>Please enter Push date and time
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 row">
+                    <button class="btn btn-primary" type="submit" style="margin-left:20px;"
+                        (click)="submit(addAnnouncement)">Schedule</button>
+                </div>
+                <hr>
+            </div>
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Push date and time</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Content</th>
+                            <th scope="col">Images</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let announcementList of AnnouncementList; index as i">
+                            <ng-container>
+                                <td scope="row">
+                                    {{announcementList.PushDate | date:'yyyy/MM/dd'}}<br>{{announcementList.PushDate |
+                                    date:'HH:mm:ss'}}
+                                </td>
+                                <td scope="row">
+                                    {{announcementList.Title}}
+                                </td>
+                                <td scope="row">
+                                    {{announcementList.SubContent}}
+                                </td>
+                                <td scope="row">
+                                    <button class="btn btn-link" (click)="goToLink(url+announcementList.Image)"
+                                        *ngIf="announcementList.Image">{{announcementList.Image.substring(announcementList.Image.lastIndexOf("/") + 1, announcementList.Image.length)}}</button>
+                                </td>
+                                <td scope="row">
+                                    <div [ngSwitch]="announcementList.Status">
+                                        <div *ngSwitchCase="1">Scheduled</div>
+                                        <div *ngSwitchCase="2">Sent</div>
+                                        <div *ngSwitchCase="3">On Hold</div>
+                                        <div *ngSwitchCase="4">Expired</div>
+                                    </div>
+                                </td>
+                                <td scope="row" class="no-wrap">
+                                    <button class="btn btn-link" style="color: red;"
+                                        *ngIf="announcementList.Status=='1'"
+                                        (click)="DeleteAnnouncement(announcementList.NoticeID)">Delete</button>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
+            <button class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+</ng-template>

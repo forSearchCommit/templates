@@ -1,0 +1,137 @@
+<ng-template #ImportSpwValiateMdl let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            Import Preview
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <div class="modal-body" *ngIf="loaded">
+        <div class="card">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label><b>Total Eligible Member</b></label>
+                        <div class="form-control" style="background:lightgrey;">
+                            <div class="row">
+                                <div class="col-11">
+                                    {{ttlMbr}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label><b>Total Prize</b></label>
+                        <div class="form-control" style="background:lightgrey;">
+                            <div class="row">
+                                <div class="col-11">{{ttlPrize}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="row" style="padding-left: 1rem">
+                <h5>Total Prize</h5>
+                <div class="text-danger" *ngIf="!importValid" style="margin-top: 0.2rem; margin-left: 1.0rem;">
+                    <i class="fa fa-exclamation-circle mr-1"></i>Award Prize should not more than Contest Prize.
+                </div>
+            </div>
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Category</th>
+                            <th scope="col">Contest Prize</th>
+                            <th scope="col">Award Prize</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itm of ttlGrpQty; index as i"
+                            [ngStyle]="{'background-color': isGreater(itm.Actual, itm.Total) ? 'rgba(255, 0, 0, 0.8)' : ''}">
+                            <ng-container>
+                                <td scope="row" [ngStyle]="{'color': isGreater(itm.Actual, itm.Total) ? 'white' : ''}">
+                                    {{itm.Grp}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': isGreater(itm.Actual, itm.Total) ? 'white' : ''}">
+                                    {{itm.Total}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': isGreater(itm.Actual, itm.Total) ? 'white' : ''}">
+                                    {{itm.Actual}}
+                                </td>
+                            </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="mt-3">
+            <div class="row" style="padding-left: 1rem">
+                <h5>Prize List</h5>
+                <div class="text-danger" *ngIf="!amountValid" style="margin-top: 0.2rem; margin-left: 1.0rem;">
+                    <i class="fa fa-exclamation-circle mr-1"></i>Prize Amount cannot be negative.
+                </div>
+            </div>
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Category</th>
+                            <th scope="col">Rank</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Display Name</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">USDT</th>
+                            <th scope="col">RMB</th>
+                            <th scope="col">Churn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itm of prizelst; index as i"
+                            [ngStyle]="{'background-color': (itm.RMB < 0 || itm.USDT < 0) ? 'rgba(255, 0, 0, 0.8)' : ''}">
+                            <ng-container>
+                                <td scope="row" [ngStyle]="{'color': (itm.RMB < 0 || itm.USDT < 0) ? 'white' : ''}">
+                                    {{itm.Group}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': (itm.RMB < 0 || itm.USDT < 0) ? 'white' : ''}">
+                                    {{itm.Rank}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': (itm.RMB < 0 || itm.USDT < 0) ? 'white' : ''}">
+                                    {{itm.Code}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': (itm.RMB < 0 || itm.USDT < 0) ? 'white' : ''}">
+                                    {{itm.Name}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': (itm.RMB < 0 || itm.USDT < 0) ? 'white' : ''}">
+                                    {{itm.DisplayName}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': (itm.RMB < 0 || itm.USDT < 0) ? 'white' : ''}">
+                                    {{itm.Qty}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': (itm.RMB < 0 || itm.USDT < 0) ? 'white' : ''}">
+                                    {{itm.USDT}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': (itm.RMB < 0 || itm.USDT < 0) ? 'white' : ''}">
+                                    {{itm.RMB}}
+                                </td>
+                                <td scope="row" [ngStyle]="{'color': (itm.RMB < 0 || itm.USDT < 0) ? 'white' : ''}">
+                                    {{itm.Churn}}
+                                </td>
+                            </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" *ngIf="loaded">
+        <button class="btn btn-primary" type="button" [disabled]="!importValid || !amountValid" (click)="submit()" >Submit</button>
+        <button class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

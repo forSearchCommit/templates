@@ -1,0 +1,73 @@
+<ng-template #EditModalContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            Edit User Group
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <ng-container *ngIf="loaded">
+        <div class="modal-body" *ngIf="Details!=null">
+            <div class="mb-3 row">
+                <label class="col-3 col-form-label">User Group</label>
+                <div class="col-9" >
+                    <label>{{Details.RoleType}} - {{Details.RoleName}}</label>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-3 col-form-label">Currency</label>
+                <div class="col-9 row">
+                    <label class="d-block m-1" for="chk-RMB">
+                        <input class="checkbox_animated" id="chk-RMB" type="checkbox" [(ngModel)]='currencyList.RMB'>
+                        RMB
+                    </label>
+                    <label class="d-block m-1" for="chk-USDT">
+                        <input class="checkbox_animated" id="chk-USDT" type="checkbox" [(ngModel)]='currencyList.USDT'>
+                        USDT
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3 row d-flex">
+                <label class="col-12 col-form-label">Access Right</label>
+                <div class="row col-12">
+                    <div class="col-4 mb-2" *ngFor="let Module of Details.ModuleList; index as i">
+                        <div class="module ">
+                            <div class="module-name">
+                                <label class="d-block m-1" for="chkAll-{{Module.ModuleId}}">
+                                    <input class="checkbox_animated" id="chkAll-{{Module.ModuleId}}" type="checkbox"
+                                        value="item.ModuleId" [checked]="Ismodulechecked(Module.MenuList)"
+                                        (change)="checkAll(Module.ModuleId,$event)" />
+                                    {{Module.ModuleName}} 
+                                    <!-- <small>{{Module.ModuleId}}</small> -->
+                                </label>
+                            </div>
+                            <div class="p-2">
+                                <div *ngFor="let item of Module.MenuList; index as a">
+                                    <label class="d-block m-1" for="chk-{{item.Value}}">
+                                        <input class="checkbox_animated" id="chk-{{item.Value}}" type="checkbox"
+                                            value="item.Value" [(ngModel)]='item.Selected'>
+                                        {{item.Text}} 
+                                        <!-- <small>{{item.Value}}</small> -->
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <ng-container *ngFor="let Module of Details.ModuleList; index as i">
+                <ng-container *ngFor="let item of Module.MenuList; index as a">
+                    {{item.Text.replaceAll(" ", "_")}}:'{{item.Value}}',<br/>
+                </ng-container>
+            </ng-container> -->
+        </div>
+        <div class="modal-footer"> 
+            <button class="btn btn-primary" type="button" (click)="updateUserGroup()">Save</button>
+            <button class="btn btn-secondary" type="button" (click)="modal.dismiss('Cross click')">Close</button>
+          </div>
+    </ng-container>
+</ng-template>

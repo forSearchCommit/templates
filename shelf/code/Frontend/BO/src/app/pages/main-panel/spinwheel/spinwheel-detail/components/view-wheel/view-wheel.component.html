@@ -1,0 +1,79 @@
+<ng-template #SpwViewWheelMdl let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            View Spinwheel
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+    <form *ngIf="loaded" class="form" autocomplete="off">
+        <div class="modal-body">
+            <div>
+                <div *ngFor="let vw of wheelList; index as i">
+                    <h6 class="modal-title">Wheel Piece {{i+1}}</h6>
+                    <div class="p-3 row">
+                        <div class="col-7">
+                            <div class="row" style="padding-right:10px">
+                                <label>Display Name<span style="color: red;">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control" autocomplete="off" placeholder="Display Name"
+                                        name="Code" [(ngModel)]="vw.DisplayName" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                            <div class="row mt-3" style="padding-right:10px">
+                                <label>Position<span style="color: red;">*</span></label>
+                                <div class="input-group">
+                                    <select class="form-control" name="Position" [(ngModel)]="vw.Position"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <option value="{{number}}" *ngFor="let number of totalPosition">
+                                            {{number}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3" style="padding-right:10px">
+                                <label>
+                                    Select File:
+                                </label>
+                                <div class="input-group">
+                                    <div class="custom-datepicker custom-datepicker-dropdown" style="width:100%">
+                                        <div class="form-group mb-0">
+                                            <div class="input-upload-group">
+                                                <input class="form-control input-upload" type="file" name="import_file"
+                                                    accept="image/*" (change)="onFileChange($event, i)" #inputFile />
+                                                <span class="btn-browse">Browse</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3" style="padding-right:10px" *ngIf="prizeGrpList.length > 0">
+                                <label>Prize Category<span style="color: red;">*</span></label>
+                                <select class="form-control" name="PrizeGrp" [(ngModel)]="vw.PrizeGrpId"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <option value="">Select</option>
+                                    <option value="{{itm.Id}}" *ngFor="let itm of prizeGrpList">
+                                        {{itm.Code}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div *ngIf="vw.ImgPath"><img [src]="vw.ImgPath" width="100%" height="auto"></div>
+                            <div *ngIf="!vw.ImgPath"><img [src]="vw.ImgURL" width="100%" height="100%"></div>
+                        </div>
+                    </div>
+                    <hr *ngIf="i != (wheelList.length - 1)" style="border-top: 3px solid #bbb">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" (click)="submit()">Update</button>
+            <button class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+</ng-template>

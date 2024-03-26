@@ -1,0 +1,27 @@
+<ng-template #EditConfirmationModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            Confirmation
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form class="form needs-validation" autocomplete="off" #addEligibleMember="ngForm" (ngSubmit)="submit(addEligibleMember)"
+        novalidate [ngClass]="{'was-validated': formValidated}">
+        <div class="modal-body">
+            <div class="mt-3 p-3">
+                <div class="row">
+                    <div class="col text-center">
+                        Update will reset Member List.<br>
+                        Are you sure to proceed?
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" (click)="editDraw(drawId)">YES</button>
+            <button class="btn btn-outline-dark" (click)="modal.close('Close click')">NO</button>
+        </div>
+    </form>
+</ng-template>

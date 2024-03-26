@@ -1,0 +1,65 @@
+<td scope="row" [ngStyle]="{'color': drawData.Status != 5 ? 'black' : 'grey' }">
+    <input type="checkbox" (change)="onCheckboxChange(drawData.DrawId, $event.target.checked)">
+</td>
+<td scope="row" [ngStyle]="{'color':drawData.Status != 5 ? 'black' : 'grey' }">
+    <a href="/dashboard/promotion/{{CurrentPromotionId}}/{{drawData.DrawId}}/promo"
+        *ngIf="drawData.Status === 2 || drawData.Status === 3 || drawData.Status === 4">
+        {{drawData.DrawDate | date:'yyyy/MM/dd'}}
+    </a>
+    <span *ngIf="drawData.Status === 1 && drawData.Status !== 2 && drawData.Status !== 3 && drawData.Status !== 4">
+        {{drawData.DrawDate | date:'yyyy/MM/dd'}}
+    </span>
+</td>
+<td scope="row" [ngStyle]="{'color':drawData.Status != 5 ? 'black' : 'grey' }">
+    {{drawData.PreStart | date:'HH:mm:ss'}}
+</td>
+<td scope="row" [ngStyle]="{'color':drawData.Status != 5 ? 'black' : 'grey' }">
+    {{drawData.StartDate | date:'HH:mm:ss'}}
+</td>
+<td scope="row" [ngStyle]="{'color':drawData.Status != 5 ? 'black' : 'grey' }">
+    {{drawData.EndDate | date:'HH:mm:ss'}}
+</td>
+<td scope="row" [ngStyle]="{'color':drawData.Status != 5 ? 'black' : 'grey' }">
+    <span *ngIf="!drawData.IsMemberImported">Incomplete</span>
+    <a href="/dashboard/promotion/{{CurrentPromotionId}}/{{drawData.DrawId}}/member"
+        *ngIf="drawData.IsMemberImported">Complete</a>
+</td>
+<td scope="row" [ngStyle]="{'color':drawData.Status != 5 ? 'black' : 'grey' }">
+    <span *ngIf="!drawData.IsRewardImported">Incomplete</span>
+    <a href="/dashboard/promotion/{{CurrentPromotionId}}/{{drawData.DrawId}}/reward"
+        *ngIf="drawData.IsRewardImported">Complete</a>
+</td>
+<!-- <td scope="row" [ngStyle]="{'color':drawData.Status != 5 ? 'black' : 'grey' }">
+    {{drawData.RewardLimit}}
+</td>
+<td scope="row" [ngStyle]="{'color':drawData.Status != 5 ? 'black' : 'grey' }">
+    <div [ngSwitch]=" .Status">
+        <div *ngSwitchCase="1">
+            Pending
+        </div>
+        <div *ngSwitchCase="2">
+            <span *ngIf="checkDateRange(draw)">
+                Active
+            </span>
+            <span *ngIf="!checkDateRange(draw)">
+                Complete
+            </span>
+        </div>
+        <div *ngSwitchCase="3">Active</div>
+        <div *ngSwitchCase="4">Expired</div>
+        <div *ngSwitchCase="5">Disabled</div>
+    </div>
+</td>
+<td scope="row" class="no-wrap" *ngIf="IsAccessible(accesslist.Edit_User_Group)">
+    <button class="btn btn-sm btn-primary" (click)="ImportEligible(drawData.DrawId)"
+        *ngIf="!drawData.IsMemberImported && drawData.Status != 5">
+        Import Eligible
+    </button>
+    <button class="btn btn-sm btn-primary" (click)="ImportRewards(drawData.DrawId)"
+        *ngIf="!drawData.IsRewardImported && drawData.Status != 5">Import
+        Rewards</button>
+    <button class="btn btn-sm btn-primary" (click)="getRewardWinners(drawData.DrawId, drawData.RewardBatchID)"
+        *ngIf="drawData.Status == 2 && drawData.Status != 5">
+        Export Winners
+    </button>
+</td> -->

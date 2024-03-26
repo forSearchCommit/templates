@@ -1,0 +1,193 @@
+<ng-template #DrawSummaryMdl let-modal>
+    <div class="modal-header">
+        <h3 class="modal-title">
+            Summary
+        </h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="loader-box" *ngIf="!loaded">
+        <div class="loader-3"></div>
+    </div>
+
+    <div class="modal-body">
+
+    
+   
+        <!--Eligible Member-->
+        <div class="">
+            <div class="table-responsive">
+                <table class="table border border-3 border-white" style="background-color: lightgrey;">
+                    <thead class="text-align-left" style="background-color: grey;"> 
+                        <tr>
+                            <th scope="col" colspan="5" style="color: white;" >Eligible Member</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row" class="white-border-cell min-width-30" >RMB</td>
+                            <td scope="row" class="white-border-cell min-width-20" >
+                                {{ isMbrImported ? ttlMbrRMB : 'N/A' }}
+                                </td>
+                            <td scope="row" class="white-border-cell min-width-10" ></td>
+                            <td scope="row" class="white-border-cell min-width-30" >USDT</td>
+                            <td scope="row" class="white-border-cell min-width-20" >
+                                {{ isMbrImported ? ttlMbrUSDT : 'N/A' }}
+                                </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--Total Estimated Bonus Prize-->
+        <div class="">
+            <div class="table-responsive">
+                <table class="table border border-3 border-white" style="background-color: lightgrey;">
+                    <thead class="text-align-left" style="background-color: grey;"> 
+                        <tr>
+                            <th scope="col" colspan="5" style="color: white;" >Total Estimated Bonus to be given</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row" class="white-border-cell min-width-30" >RMB</td>
+                            
+                            <td scope="row" class="white-border-cell min-width-20" >
+                                {{ isMbrImported ? ttlBonusRMB : 'N/A' }}
+                                </td>
+                            <td scope="row" class="white-border-cell min-width-10" ></td>
+                            <td scope="row" class="white-border-cell min-width-30" >USDT</td>
+                            <td scope="row" class="white-border-cell min-width-20" >
+                                {{ isMbrImported ? ttlBonusUSDT : 'N/A' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row" class="white-border-cell min-width-30" >Normal</td>
+                            <td scope="row" class="white-border-cell min-width-20" >{{ isMbrImported ? normalBonusRMB : 'N/A' }}
+                        </td>
+                            <td scope="row" class="white-border-cell min-width-10" ></td>
+                            <td scope="row" class="white-border-cell min-width-30" >Normal</td>
+                            <td scope="row" class="white-border-cell min-width-20" >{{ isMbrImported ? normalBonusUSDT : 'N/A' }}
+                                
+                        </td>
+                        </tr>
+                        <tr>
+                            <td scope="row" class="white-border-cell min-width-30" >Consolation</td>
+                            <td scope="row" class="white-border-cell min-width-20" >{{ isMbrImported ? conBonusRMB : 'N/A' }}
+                              
+                        </td>
+                            <td scope="row" class="white-border-cell min-width-10" ></td>
+                            <td scope="row" class="white-border-cell min-width-30" >Consolation</td>
+                            <td scope="row" class="white-border-cell min-width-20" >{{ isMbrImported ? conBonusUSDT : 'N/A' }}
+                             
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--Total Estimated Physical Prize-->
+        <div class="">
+            <div class="table-responsive">
+                <table class="table border border-3 border-white" style="background-color: lightgrey;">
+                    <thead class="text-align-left" style="background-color: grey;"> 
+                        <tr>
+                            <th scope="col" colspan="5" style="color: white;" >Total Estimated Physical Prize to be given</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of prizeCountLst; index as i">
+                            <ng-container>
+                                <ng-container [ngTemplateOutlet]="templatePrize"
+                                    [ngTemplateOutletContext]="{ $implicit: item }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templatePrize let-item>
+                            <td scope="row" class="white-border-cell min-width-30" >{{item.PrizeDisplayName}}</td>
+                             <td scope="row" class="white-border-cell min-width-20" >{{ isMbrImported ? item.TotalCount : 'N/A' }}
+                               
+                        </td>
+                             <td scope="row" class="white-border-cell min-width-10" ></td>
+                             <td scope="row" class="white-border-cell min-width-30" ></td>
+                             <td scope="row" class="white-border-cell min-width-20" ></td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--Winning Combinations-->
+        <div class="">
+            <div class="table-responsive">
+                <table class="table border border-3 border-white" style="background-color: lightgrey;">
+                    <thead class="text-align-left" style="background-color: grey;"> 
+                        <tr>
+                            <th scope="col" colspan="5" style="color: white;" >Winning Combinations: {{ttlWinningCombination}}</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <!--Prize Type-->
+        <div class="">
+            <div class="table-responsive">
+                <table class="table border border-3 border-white" style="background-color: lightgrey;">
+                    <thead class="text-align-left" style="background-color: grey;"> 
+                        <tr>
+                            <th scope="col" colspan="5" style="color: white;" >Prize Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let draw of prizeList; index as i" >
+                            <ng-container>
+                                <ng-container [ngTemplateOutlet]="templatePrizeType"
+                                    [ngTemplateOutletContext]="{ $implicit: draw }">
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+
+                        <ng-template #templatePrizeType let-draw>
+                             <td scope="row" class="white-border-cell min-width-30" >{{draw.PrizeDisplayName}}</td>
+                             <td scope="row" class="white-border-cell min-width-20" >Qty</td>
+                             <td scope="row" class="white-border-cell min-width-10" >{{draw.GivenCount}}</td>
+                             <td scope="row" class="white-border-cell min-width-30" >Not assigned</td>
+                             <td scope="row" class="white-border-cell min-width-20" >{{draw.RemainCount}}</td>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--Consolation Prize-->
+        <div class="">
+            <div class="table-responsive">
+                <table class="table border border-3 border-white" style="background-color: lightgrey;">
+                    <thead class="text-align-left" style="background-color: grey;"> 
+                        <tr>
+                            <th scope="col" colspan="5" style="color: white;" >Consolation Prize</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row" class="white-border-cell min-width-30" >{{conPrize[0].PrizeDisplayName}}</td>
+                            <td scope="row" class="white-border-cell min-width-20" >Qty</td> 
+                            <td scope="row" class="white-border-cell min-width-10" >{{conPrize[0].TotalCount}}</td>
+                            <td scope="row" class="white-border-cell min-width-30" ></td>
+                            <td scope="row" class="white-border-cell min-width-20" ></td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer" *ngIf="loaded">
+        <button class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

@@ -1,0 +1,126 @@
+<app-breadcrumb [title]="'User Profile'" [items]="" [active_item]="'User Profile'">
+</app-breadcrumb>
+<div class="container-fluid">
+    <div class="loader-box" *ngIf="!loaded; else loadedBlock">
+            <div class="loader-3"></div>
+    </div>
+    <ng-template #loadedBlock>
+    <div class="row row-deck">
+        <div class="col-sm-6">
+            <div class="card">
+                <!-- <form class="form needs-validation" autocomplete="off" #editProfile="ngForm"
+                (ngSubmit)="EditProfile(editProfile)" novalidate  [ngClass]="{'was-validated': formValidated2}"> -->
+                <div class="card-body UserDetail">
+                    <h5 class="card-title ">Profile Detail</h5>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <div class="title">User ID</div>
+                                <div class="detail">{{profile.UserId}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="title">Name</div>
+                                <div class="detail">{{profile.Name}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="title">Email</div>
+                                <div class="detail">{{profile.Email}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="title">Role Type</div>
+                                <div class="detail">{{RoleDic&& RoleDic[profile.UserRole]?RoleDic[profile.UserRole]:''}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="title">Status</div>
+                                <ng-container [ngSwitch]="profile.Status">
+                                    <label class="badge badge-danger" *ngSwitchCase="'0'">Disabled</label>
+                                    <label class="badge badge-success" *ngSwitchCase="'1'">Active</label>
+                                    <label class="badge badge-grey" *ngSwitchCase="'2'">Deleted</label>
+                                </ng-container>
+                                <!-- <div class="detail">{{RoleDic&& RoleDic[profile.UserRole]?RoleDic[profile.UserRole]:''}}</div>
+                                <label>Status</label>
+                                <br /> -->
+                            </div>
+                            <div class="form-group"><!--[VV-222] NIA 20210810-->
+                                <div class="title">Time Zone</div>
+                                    <select class="form-control" id="UserTimezoneSelect" [(ngModel)]="UserTimezoneSelect" 
+                                        name="UserTimezoneSelect" (change)="TimezoneOnChanged($event)">
+                                        <option value="-12">(GMT-12:00) International Date Line West</option>
+                                        <option value="-11">(GMT-11:00) Midway Island, Samoa</option>
+                                        <option value="-10">(GMT-10:00) Hawaii</option>
+                                        <option value="-9">(GMT-09:00) Alaska</option>
+                                        <option value="-8">(GMT-08:00) Pacific Time (US & Canada)</option>
+                                        <option value="-7">(GMT-07:00) Arizona, Mountain Time (US & Canada)</option>
+                                        <option value="-6">(GMT-06:00) Central America, Mexico City, Monterrey</option>
+                                        <option value="-5">(GMT-05:00) Eastern Time (US & Canada), Indiana (East)</option>
+                                        <option value="-4" selected>(GMT-04:00) Atlantic Time (Canada), Santiago</option>
+                                        <option value="-3.5">(GMT-03:30) Newfoundland</option>
+                                        <option value="-3">(GMT-03:00) Buenos Aires, Georgetown, Greenland</option>
+                                        <option value="-2">(GMT-02:00) Mid-Atlantic</option>
+                                        <option value="-1">(GMT-01:00) Azores, Cape Verde Is.</option>
+                                        <option value="0">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, London</option>
+                                        <option value="1">(GMT+01:00) Amsterdam, Berlin, Rome, Stockholm, Vienna</option>
+                                        <option value="2">(GMT+02:00) Athens, Istanbul, Beirut, Cairo</option>
+                                        <option value="3">(GMT+03:00) Moscow, Kuwait, Riyadh, Baghdad</option>
+                                        <option value="3.5">(GMT+03:30) Tehran</option>
+                                        <option value="4">(GMT+04:00) Abu Dhabi, Muscat, Baku, Yerevan</option>
+                                        <option value="4.5">(GMT+04:30) Kabul</option>
+                                        <option value="5">(GMT+05:00) Islamabad, Karachi</option>
+                                        <option value="5.5">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+                                        <option value="5.75">(GMT+05:45) Kathmandu</option>
+                                        <option value="6">(GMT+06:00) Almaty, Astana, Dhaka</option>
+                                        <option value="6.5">(GMT+06:30) Yangon (Rangoon)</option>
+                                        <option value="7">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+                                        <option value="8">(GMT+08:00) Beijing, Perth, Hong Kong, Kuala Lumpur, Singapore</option>
+                                        <option value="9">(GMT+09:00) Osaka, Sapporo, Tokyo, Seoul</option>
+                                        <option value="9.5">(GMT+09:30) Adelaide, Darwin</option>
+                                        <option value="10">(GMT+10:00) Canberra, Melbourne, Sydney</option>
+                                        <option value="11">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
+                                        <option value="12">(GMT+12:00) Auckland, Wellington, Fiji</option>
+                                        <option value="13">(GMT+13:00) Nuku'alofa</option>
+                                    </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card-footer">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div> -->
+                <!-- </form> -->
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <form class="form needs-validation" autocomplete="off" #changePassFrom="ngForm"
+                    (ngSubmit)="ChangePassword(changePassFrom)" novalidate  [ngClass]="{'was-validated': formValidated}">
+                    <div class="card-body">
+                        <h5 class="card-title">Change Password</h5>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="currentPass">Current Password</label>
+                                    <input class="form-control" name="currentPass" type="password" maxlength="16" minlength="6" autocomplete="off" required ngModel>
+                                        <small>*Min 8-16 characters & alphanumeric</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPass">New Password</label>
+                                    <input class="form-control" name="newPass" type="password" maxlength="16" minlength="6" autocomplete="off" required ngModel>
+                                        <small>*Min 8-16 characters & alphanumeric</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="conPass">Confirm New Password</label>
+                                    <input class="form-control" name="conPass" type="password" maxlength="16" minlength="6" autocomplete="off" required ngModel>
+                                        <small>*Min 8-16 characters & alphanumeric</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </ng-template>
+</div>
