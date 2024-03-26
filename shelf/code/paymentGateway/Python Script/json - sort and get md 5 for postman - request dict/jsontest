@@ -1,0 +1,12 @@
+{
+    "mchId": 40476,
+    "appId": "5360f069eccd4f258988ee049ac921cc",
+    "productId": 8006,
+    "mchOrderNo": "test56",
+    "currency": "CNY",
+    "amount": 111000,
+    "clientIp": "49.128.64.30",
+    "notifyUrl": "https://pay.n8stg.com/Common/NotifyWithdrawal/HJPay",
+    "subject": "test",
+    "body": "test"
+}

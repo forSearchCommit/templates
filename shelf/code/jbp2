@@ -1,0 +1,8 @@
+=================Input File=============
+{'company_id': '1470', 'bank_id': '1', 'amount': '100.00', 'company_order_num': 'jbptestn85', 'company_user': 'test123', 'estimated_payment_bank': '1', 'deposit_mode': '2', 'group_id': '0', 'web_url': 'https://pay.n8stg.com/Common/NotifyWithdrawal/Pay', 'memo': '', 'key': 'f01fd7e72bf0e4959b0fcb002372704d', 'terminal': '1'}
+==============Json Request Body=========
+{"company_id": "1470", "bank_id": "1", "amount": "100.00", "company_order_num": "jbptestn85", "company_user": "test123", "estimated_payment_bank": "1", "deposit_mode": "2", "group_id": "0", "web_url": "https://pay.n8stg.com/Common/NotifyWithdrawal/Pay", "memo": "", "key": "f01fd7e72bf0e4959b0fcb002372704d", "terminal": "1"}
+================Query String============
+13f57b9633ae0158a27af7a97845826214701100.00jbptestn85test123120https://pay.n8stg.com/Common/NotifyWithdrawal/Pay
+===================Signed===============
+f01fd7e72bf0e4959b0fcb002372704d

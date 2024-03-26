@@ -1,0 +1,12 @@
+{
+	"company_id":"1470",
+	"bank_id":"1",
+	"amount":"100.00",
+	"company_order_num":"jbptestn85",
+	"company_user":"test123",
+	"estimated_payment_bank":"1",
+	"deposit_mode":"2",
+	"group_id":"0",
+	"web_url":"https://pay.n8stg.com/Common/NotifyWithdrawal/Pay",
+    "memo":""
+}

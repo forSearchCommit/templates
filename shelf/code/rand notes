@@ -1,0 +1,171 @@
+ SELECT   
+ DrawId, TransactionId, DrawDate, PreStart, StartDate, EndDate,  
+ IsMemberImported, IsRewardImported, MemberBatchID, RewardBatchID,  
+ Status, CreatedDate, CreatedBy, ModifiedDate, ModifiedBy  
+ FROM tblCampaignDetails with (nolock)  
+ WHERE 1=1
+
+ {{
+  "SettingId": 1021,
+  "PaymentTypeId": 21,
+  "TransactionPrefix": "WSYCN",
+  "MerchantId": "Suyun",
+  "TransactionType": 2,
+  "FeesType": 2,
+  "Status": 1,
+  "Currency": "RMB",
+  "FlatAmount": 5.0,
+  "Rate": 0.0,
+  "MinAmount": 0.0,
+  "MaxAmount": 0.0
+}}
+"{\"SettingId\":1021,\"PaymentTypeId\":21,\"TransactionPrefix\":\"WSYCN\",\"MerchantId\":\"Suyun\",\"TransactionType\":2,\"FeesType\":2,\"Status\":1,\"Currency\":\"RMB\",\"FlatAmount\":5.0,\"Rate\":0.0,\"MinAmount\":0.0,\"MaxAmount\":0.0}"
+
+"{\"SettingId\":1020,\"PaymentTypeId\":20,\"TransactionPrefix\":\"DSYOBTCN\",\"MerchantId\":\"Suyun\",\"TransactionType\":1,\"FeesType\":1,\"Status\":1,\"Currency\":\"RMB\",\"FlatAmount\":0.0,\"Rate\":2.8,\"MinAmount\":0.0,\"MaxAmount\":0.0}"
+
+{{
+  "SettingId": 1020,
+  "PaymentTypeId": 20,
+  "TransactionPrefix": "DSYOBTCN",
+  "MerchantId": "Suyun",
+  "TransactionType": 1,
+  "FeesType": 1,
+  "Status": 1,
+  "Currency": "RMB",
+  "FlatAmount": 0.0,
+  "Rate": 2.8,
+  "MinAmount": 0.0,
+  "MaxAmount": 0.0
+}}
+
+"{\"SettingId\":1021,\"PaymentTypeId\":21,\"TransactionPrefix\":\"WSYCN\",\"MerchantId\":\"Suyun\",\"TransactionType\":2,\"FeesType\":2,\"Status\":1,\"Currency\":\"RMB\",\"FlatAmount\":5.0,\"Rate\":0.0,\"MinAmount\":0.0,\"MaxAmount\":0.0}"
+
+Description = "AFFCode - {0}, FullName - {1}, Currency - {2}, CreditLimit - {3}, AvailableBalance - {4}, Balance - {5}, Status - {6}, CommissionRate - {7}, DPMin - {8}, DPMax - {9}, TopUpMin - {10}, TopUpMax - {11}, BankName - {12}, BankAccountNumber - {13}"
+
+
+[global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=172.25.14.52,5002;Initial Catalog=Affiliate_P003;Persist Security Inf" +
+            "o=True;User ID=sa;Password=Pass.123")]
+        public string AffiliateConnectionString {
+            get {
+                return ((string)(this["AffiliateConnectionString"]));
+            }
+        }
+
+        <div class="float-container">
+    <div class="float-block">
+        <div class="float animate__animated animate__jackInTheBox">
+            <div class="swiper-container swiper swiper-container-initialized swiper-container-horizontal">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-slide-active" style="width: 190px;">
+                        <div class="bg-float" style="background-image: url('https://n8doca01.n8stg.com/CDN/web/static/img/prediction/cny2024/float.gif');"></div>
+                    </div>
+                    <!-- Add more slides if needed -->
+                </div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{
+"affiliateId":"test",
+"transactionNo":"WMMA2311094037882",
+"loginName": "test",
+"amount":"101",
+"status":"1",
+"sign":"9b3b5a858c8795a5072be932b93f12b4"
+}
+098f6bcd4621d373cade4e832627b4f6
+6f058941dca7ccb8aaa645128779cb42
+098f6bcd4621d373cade4e832627b4f6
+38b3eff8baf56627478ec76a704e9b52
+
+
+//Endpoint, Step, RequestId, Description, Action, Values
+private const string logString = "[MysteryPacket][Slot][{0}][{1}][Step : {2}][ Description : {3}, Action : {4}, Value : {5} ]";
+
+NLogUtils.Info(string.Format(logString, sp, 1, requestId, memberCode, "Prize Target Status",targetStatus));
+
+
+USE [GCT_P003]
+GO
+/****** Object:  StoredProcedure [dbo].[VIPExperience_CreateVIPBonus_Campaign]    Script Date: 2/2/2024 5:14:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:              <Feng Wei>
+-- Create date: <4/1/2024>
+-- Description: <Campaign_Insert Vip Bonus>
+-- =============================================
+
+ALTER PROCEDURE [dbo].[VIPExperience_CreateVIPBonus_Campaign]
+    @TransactionDate DATETIME2 = null,
+    @BonusDate DATETIME2,
+    @ExpiredDate DATETIME2 = null,
+    @MemberID INTEGER,
+    @MemberName NVARCHAR(100),
+    @MemberVIPLevel INTEGER,
+    @VIPBonusType INTEGER,
+    @VIPBonusEventId NVARCHAR(100) = null,
+    @Status INTEGER,
+    @BonusAmount NUMERIC(20, 4),
+    @ChurnRequired NUMERIC(20, 4),
+    @AdjustmentTransactionNo NVARCHAR(20) = null,
+    @ClaimDateUTC DATETIME2 = null,
+    @ClaimBy NVARCHAR(100)= null,
+    @DateCreated DATETIME2 = null,
+    @CreatedBy NVARCHAR(100),
+    @DateUpdated DATETIME2 = null,
+    @UpdatedBy NVARCHAR(100) = null,
+    @Remark NVARCHAR(350)  = '',
+        @adjustmentReason NVARCHAR(100) = null,
+        @churnMultiplierDisplay INT = null,
+        @isDepositBonus BIT = null,
+    @transactionReferenceNo VARCHAR(150) = null
+AS
+BEGIN
+        SET NOCOUNT ON; 
+
+    SELECT @MemberID = MemberID, @MemberVIPLevel = memberlevel from [dbo].[Member] where membername = @MemberName
+
+    INSERT INTO [dbo].[VIPBonusTransaction]
+            ([TransactionDate],[BonusDate],[ExpiredDate],[MemberID]
+            ,[MemberName],[MemberVIPLevel],[VIPBonusType]
+            ,[VIPBonusEventId],[Status],[BonusAmount]
+            ,[ChurnRequired],[AdjustmentTransactionNo],[ClaimDateUTC]
+            ,[ClaimBy],[DateCreated],[CreatedBy]
+            ,[DateUpdated],[UpdatedBy],[Remark], [AdjustmentReason]
+                        ,[ChurnMultiplierDisplay], [IsDepositBonus], [TransactionReferenceNo])
+    VALUES
+            (GETUTCDATE(),@BonusDate,@ExpiredDate,@MemberID
+            ,@MemberName,@MemberVIPLevel,@VIPBonusType
+            ,@VIPBonusEventId,@Status,@BonusAmount
+            ,@ChurnRequired,@AdjustmentTransactionNo,@ClaimDateUTC
+            ,@ClaimBy,GETDATE(),@CreatedBy
+            ,@DateUpdated,@UpdatedBy,'CNY Slot 2024', 25
+                        ,@churnMultiplierDisplay, @isDepositBonus, @transactionReferenceNo)
+
+    SELECT SCOPE_IDENTITY();
+END
+
+
+
+use Affiliate_P003
+select * from Affiliate.AffiliateInfos where CredentialID = '2051913'
+
+select * from Affiliate.AffiliateCodes where CredentialID = '2051913'
+
+select * from Affiliate.AffiliateTree where CredentialID = '2051913' or ParentCredentialID = '2051913'
+
+select * from Affiliate.AffiliateInfos where CredentialID = '2052012'
+
+select * from Affiliate.AffiliateCodes where CredentialID = '2052012'
+
+use GCT_P003
+
+select  * from Member where MemberName = 'kcUserR01'

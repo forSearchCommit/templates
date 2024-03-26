@@ -1,0 +1,8 @@
+=================Input File=============
+{'mchId': 40476, 'appId': '5360f069eccd4f258988ee049ac921cc', 'productId': 8006, 'mchOrderNo': 'test56', 'currency': 'CNY', 'amount': 111000, 'clientIp': '49.128.64.30', 'notifyUrl': 'https://pay.n8stg.com/Common/NotifyWithdrawal/HJPay', 'subject': 'test', 'body': 'test', 'sign': 'E9AC5A93AB70BB00B3E1EB224312DA6D'}
+==============Json Request Body=========
+{"amount": 111000, "appId": "5360f069eccd4f258988ee049ac921cc", "body": "test", "clientIp": "49.128.64.30", "currency": "CNY", "mchId": 40476, "mchOrderNo": "test56", "notifyUrl": "https://pay.n8stg.com/Common/NotifyWithdrawal/HJPay", "productId": 8006, "sign": "E9AC5A93AB70BB00B3E1EB224312DA6D", "subject": "test"}
+================Query String============
+amount=111000&appId=5360f069eccd4f258988ee049ac921cc&body=test&clientIp=49.128.64.30&currency=CNY&mchId=40476&mchOrderNo=test56&notifyUrl=https://pay.n8stg.com/Common/NotifyWithdrawal/HJPay&productId=8006&subject=test&key=123
+===================Signed===============
+E9AC5A93AB70BB00B3E1EB224312DA6D

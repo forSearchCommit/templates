@@ -1,0 +1,11 @@
+=================Json Data=============
+{
+    "userName": "tester",
+    "merchantNo": "666666",
+    "payAmount": "1",
+    "merchantOrderId": "WJYEB2309145465320",
+    "bankNum": "6c5onyK2mNAk7zbeWpGpDw==",
+    "bankOwner": "test",
+    "orderType": "test",
+    "sign": "f6089ed7b0797ddaf30d5393282fcb03"
+}
